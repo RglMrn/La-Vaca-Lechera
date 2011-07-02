@@ -1,0 +1,7 @@
+Este es un ChangeLog del codigo del juego.
+
+-Modifique algunas llamadas que utilizaban nombres incorrectos de objetos.
+-Modifique la seccion de pruebas. Ahora estoy probando que el objeto juego y el objeto cubeta funcionen.
+-El objeto juego puede realizar el Master Loop sencillo (Actualizar y Dibujar las entidades).
+-El objeto cubeta puede cambiar su posicion dependiendo de si el usuario presiona alguna flecha, w, a, s o d.
+-Adicione los atributos ancho y largo al objeto entidad.

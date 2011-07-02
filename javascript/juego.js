@@ -38,7 +38,7 @@ Juego.prototype.dibujar = function() {
     this.ctx.clearRect(0, 0, this.ancho, this.alto);
     this.ctx.save(); //No se si es necesario
     for (var i = 0; i < this.entidades.length; i++) {
-        this.entidades[i].draw(this.ctx);
+        this.entidades[i].dibujar(this.ctx);
     }
     this.ctx.restore(); //No se si es necesario
 };
@@ -48,13 +48,13 @@ Juego.prototype.actualizar = function() {
         var entidad = this.entidades[i];
         
         if (!entidad.remover) {
-            entity.update();
+            entidad.actualizar();
         }
     }
     
-    for (var i = this.entities.length-1; i >= 0; --i) {
-        if (this.entities[i].remover) {
-            this.entities.splice(i, 1);
+    for (var i = this.entidades.length-1; i >= 0; --i) {
+        if (this.entidades[i].remover) {
+            this.entidades.splice(i, 1);
         }
     }
 };

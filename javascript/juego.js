@@ -17,12 +17,11 @@ function Juego(ctx) { //El controlador principal del juego
     this.ancho = ctx.canvas.width;
     this.alto = ctx.canvas.height;
     
-    this.lastUpdateTimestamp = null; //Sirven para determinar cuanto tiempo ha pasado desde el ultimo update
-    this.deltaTime = null;
+    this.clock = new Clock();
+    this.clockTick;
 }
 
 Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
-    this.lastUpdateTimestamp = Date.now();
     var that = this;
     (function gameLoop() {
         that.loop();
@@ -59,10 +58,15 @@ Juego.prototype.actualizar = function() {
     }
 };
 
+Juego.prototype.actualizarReloj = function() {
+    this.ctx.fillstyle = "blue";
+    this.ctx.font = "bold 10mm Arial";
+    this.ctx.fillText("Reloj: " + this.clock.gameTime / 1000, 50, 50);
+}
+
 Juego.prototype.loop = function() { //loop del juego que llama a los actualizar y dibujar de las entidades
-    var now = Date.now();
-    this.deltaTime = now - this.lastUpdateTimestamp;
+    this.clockTick = this.clock.tick();
     this.actualizar();
     this.dibujar();
-    this.lastUpdateTimestamp = now;
+    this.actualizarReloj();
 };

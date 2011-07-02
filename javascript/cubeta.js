@@ -12,21 +12,21 @@ Cubeta.prototype.moverCubeta = function(evt) {//Evento que sera llamado cuando s
         case 38 :  /* Up arrow was pressed o se presiono w */
         case 87 :            
             this.dx = 0;
-            this.dy = -10;
+            this.dy = -20;
         break;
         case 40:  /* Down arrow was pressed */
         case 83:    
             this.dx = 0;
-            this.dy = 10;
+            this.dy = 20;
         break;
         case 37:  /* Left arrow was pressed */
         case 65:    
-            this.dx = -10;
+            this.dx = -20;
             this.dy = 0;
         break;
         case 39:  /* Right arrow was pressed */
         case 68:    
-            this.dx = 10;
+            this.dx = 20;
             this.dy = 0;
         break;
     }

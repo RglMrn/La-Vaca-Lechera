@@ -1,5 +1,13 @@
 Este es un ChangeLog del codigo del juego.
 
+-Quite el antiguo metodo de calcular tiempos y adicione un Reloj del juego.
+-Centre el canvas
+-Cambie la imagen placeholder de cubeta por la del granjero.
+
+
+
+
+---------------
 -Modifique algunas llamadas que utilizaban nombres incorrectos de objetos.
 -Modifique la seccion de pruebas. Ahora estoy probando que el objeto juego y el objeto cubeta funcionen.
 -El objeto juego puede realizar el Master Loop sencillo (Actualizar y Dibujar las entidades).

@@ -1,5 +1,7 @@
-function Vaca(imagen, juego, x, y) { //Entidad Vaca
-	Entidad.call(this, imagen, juego, x, y) //Obteniendo los atributos de Entidad
+function Vaca(imagenes, juego, x, y) { //Entidad Vaca
+	this.img_normal = imagenes[0];
+	this.img_disparo = imagenes[1];
+	Entidad.call(this, this.img_normal, juego, x, y) //Obteniendo los atributos de Entidad
 	this.acciones = { //Acciones que puede realizar la vaca
 		ELEGIR_DISPARO : 0,
 		MOVERSE : 1,
@@ -7,7 +9,7 @@ function Vaca(imagen, juego, x, y) { //Entidad Vaca
 	}
 	this.posiciones = [100, 250, 450] //Valor Y para cada posición
 	this.dy = 5 //Aumento en Y por cada iteración
-	this.dt = 75 //Tiempo entre un disparo y otro
+	this.dt = 50 //Tiempo entre un disparo y otro
 	this.contador = 0
 	this.accion = this.acciones.ELEGIR_DISPARO
 }
@@ -23,6 +25,7 @@ Vaca.prototype.actualizar = function() {//Logica de actualizar la posicion de la
 }
 
 Vaca.prototype.elegir_disparo = function() {
+	this.imagen = this.img_normal
 	if(this.contador < this.dt) {
 		this.contador++
 	}
@@ -53,8 +56,14 @@ Vaca.prototype.moverse = function() {
 }
 
 Vaca.prototype.disparar = function() {
-	console.log("nuevo disparo")
-	this.accion = this.acciones.ELEGIR_DISPARO
+	this.imagen = this.img_disparo
+	if(this.contador < this.dt) {
+		this.contador++
+	}
+	else {
+		this.contador = 0
+		this.accion = this.acciones.ELEGIR_DISPARO
+	}
 }
 
 Vaca.prototype.dibujar = function(ctx) {//Logica de dibujar de la Vaca

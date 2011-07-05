@@ -1,76 +1,99 @@
-function Vaca(imagenes, juego, x, y) { //Entidad Vaca
-	this.img_normal = imagenes[0];
-	this.img_disparo = imagenes[1];
-	Entidad.call(this, this.img_normal, juego, x, y) //Obteniendo los atributos de Entidad
-	this.acciones = { //Acciones que puede realizar la vaca
-		ELEGIR_DISPARO : 0,
-		MOVERSE : 1,
-		DISPARAR : 2
-	}
-	this.posiciones = [100, 250, 450] //Valor Y para cada posición
-	this.dy = 5 //Aumento en Y por cada iteración
-	this.dt = 50 //Tiempo entre un disparo y otro
-	this.contador = 0
-	this.accion = this.acciones.ELEGIR_DISPARO
+function Vaca(juego, x, y) {
+	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_normal.jpg');
+	Entidad.call(this, this.sprite, juego, x, y);
+	var espera = 1000; //Tiempo antes de siguiente acción
+	this.animation = new Animation(this.sprite, 100, espera, false);
+	//Opciones para los disparos
+	this.alturas = [100, 250, 450];
+	this.distancias = [100, 200, 400];
 }
 
-Vaca.prototype = new Entidad()
-Vaca.prototype.constructor = Vaca
+Vaca.prototype = new Entidad();
+Vaca.prototype.constructor = Vaca;
 
-Vaca.prototype.actualizar = function() {//Logica de actualizar la posicion de la Vaca
-	if(this.accion == this.acciones.ELEGIR_DISPARO){ this.elegir_disparo() }
-	else if(this.accion == this.acciones.MOVERSE) { this.moverse() }
-	else { this.disparar() }
-	Entidad.prototype.actualizar.call(this)
-}
-
-Vaca.prototype.elegir_disparo = function() {
-	this.imagen = this.img_normal
-	if(this.contador < this.dt) {
-		this.contador++
-	}
-	else {
-		this.contador = 0
-		var random = Math.floor(Math.random()*this.posiciones.length)
-		this.posicion = this.posiciones[random]
-		this.accion = this.acciones.MOVERSE
-	}
-}
-
-Vaca.prototype.moverse = function() {
-	if(this.y < this.posicion) { 
-		this.y += this.dy
-		if(this.y > this.posicion) {
-			this.y = this.posicion
+Vaca.prototype.actualizar = function() {
+	if(this.animation.isDone()) {
+		var disparo = this.elegirDisparo();
+		if(disparo.y > this.y) {
+			//Mover hacia abajo
+			this.juego.addEntidad(new VacaAbajo(this.juego, this.x, this.y, disparo));
+			this.remover = true;
+		}
+		else if(disparo.y < this.y) {
+			//Mover hacia arriba
+			this.juego.addEntidad(new VacaArriba(this.juego, this.x, this.y, disparo));
+			this.remover = true;
+		}
+		else {
+			//Disparar
+			console.log("disparar");
 		}
 	}
-	else if(this.y > this.posicion) { 
-		this.y -= this.dy
-		if(this.y < this.posicion) {
-			this.y = this.posicion
-		}
-	}
-	else {
-		this.accion = this.acciones.DISPARAR
-	}
+	Entidad.prototype.actualizar.call(this);
 }
 
-Vaca.prototype.disparar = function() {
-	this.imagen = this.img_disparo
-	if(this.contador < this.dt) {
-		this.contador++
-	}
-	else {
-		this.contador = 0
-		this.accion = this.acciones.ELEGIR_DISPARO
-	}
-}
-
-Vaca.prototype.dibujar = function(ctx) {//Logica de dibujar de la Vaca
-	//Logica propia
-	Entidad.prototype.dibujar.call(this, ctx);
+Vaca.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
 };
 
-Vaca.prototype.generarChorro = function() { 
-	//Generar el chorro y adicionarlo a las entidades del juego
+Vaca.prototype.elegirDisparo = function() {
+	var altura_rand = Math.floor(Math.random()*this.alturas.length);
+	var distancia_rand = Math.floor(Math.random()*this.distancias.length);
+	disparo = {
+		"x":this.distancias[distancia_rand],
+		"y":this.alturas[altura_rand]
+	}
+	return disparo;
+}
+
+function VacaArriba(juego, x, y, disparo) {
+	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_arriba.jpg');
+	this.speed = 0.1;
+	this.animation = new Animation(this.sprite, 100, 100, true);
+	this.disparo = disparo;
+	Entidad.call(this, this.sprite, juego, x, y);
+}
+
+VacaArriba.prototype = new Entidad();
+VacaArriba.prototype.constructor = VacaArriba;
+
+VacaArriba.prototype.actualizar = function() {
+	if(this.y < this.disparo.y) {
+		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.remover = true;
+	}
+	else {
+		this.y -= this.speed * this.juego.clockTick;
+	}
+	Entidad.prototype.actualizar.call(this);
+}
+
+VacaArriba.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+};
+
+function VacaAbajo(juego, x, y, disparo) {
+	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_abajo.png');
+	this.speed = 0.1;
+	this.animation = new Animation(this.sprite, 100, 100, true);
+	this.disparo = disparo;
+	Entidad.call(this, this.sprite, juego, x, y);
+}
+
+VacaAbajo.prototype = new Entidad();
+VacaAbajo.prototype.constructor = VacaAbajo;
+
+VacaAbajo.prototype.actualizar = function() {
+	if(this.y > this.disparo.y) {
+		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.remover = true;
+	}
+	else {
+		this.y += this.speed * this.juego.clockTick;
+	}
+	Entidad.prototype.actualizar.call(this);
+}
+
+VacaAbajo.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
 };

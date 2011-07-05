@@ -3,6 +3,7 @@ function require(jspath) {
 }
 
 require("assetManager.js");
+require("animation.js");
 require("clock.js");
 require("entidad.js");
 require("chorro.js");

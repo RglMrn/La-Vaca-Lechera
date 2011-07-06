@@ -24,7 +24,7 @@ ASSET_MANAGER.downloadAll(function() {
 
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 800, 400);
-    cubeta = new Cubeta(ASSET_MANAGER.getAsset('./imagenes/granjero_cubeta_abajo_small.jpeg'), vacalechera, 200, 200);
+    cubeta = new Cubeta(vacalechera, 200, 200);
     window.addEventListener('keydown',presionoKey,true);
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(cubeta);

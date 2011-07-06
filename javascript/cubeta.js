@@ -1,7 +1,10 @@
-function Cubeta(imagen, juego, x, y) { //Entidad Cubeta
-	Entidad.call(this, imagen, juego, x, y); //Obteniendo los atributos de Entidad
-    this.dx = 0;
-    this.dy = 0;
+function Cubeta(juego, x, y) { //Entidad Cubeta
+	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/granjero_cubeta_abajo_small.jpeg');
+	this.ancho = this.imagen.width;
+	this.largo = this.imagen.height;
+	this.dx = 0;
+	this.dy = 0;
 }
 
 Cubeta.prototype = new Entidad();

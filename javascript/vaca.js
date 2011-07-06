@@ -1,8 +1,8 @@
 function Vaca(juego, x, y) {
-	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_normal.jpg');
-	Entidad.call(this, this.sprite, juego, x, y);
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_normal.jpg');
+	Entidad.call(this, juego, x, y);
 	var espera = 1000; //Tiempo antes de siguiente acción
-	this.animation = new Animation(this.sprite, 100, espera, false);
+	this.animation = new Animation(this.imagen, 100, espera, false);
 	//Opciones para los disparos
 	this.alturas = [100, 250, 450];
 	this.distancias = [100, 200, 400];
@@ -48,11 +48,11 @@ Vaca.prototype.elegirDisparo = function() {
 }
 
 function VacaArriba(juego, x, y, disparo) {
-	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_arriba.jpg');
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_arriba.jpg');
 	this.speed = 0.1;
-	this.animation = new Animation(this.sprite, 100, 100, true);
+	this.animation = new Animation(this.imagen, 100, 100, true);
 	this.disparo = disparo;
-	Entidad.call(this, this.sprite, juego, x, y);
+	Entidad.call(this, juego, x, y);
 }
 
 VacaArriba.prototype = new Entidad();
@@ -75,11 +75,11 @@ VacaArriba.prototype.dibujar = function(ctx) {
 };
 
 function VacaAbajo(juego, x, y, disparo) {
-	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_abajo.png');
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_abajo.png');
 	this.speed = 0.1;
-	this.animation = new Animation(this.sprite, 100, 100, true);
+	this.animation = new Animation(this.imagen, 100, 100, true);
 	this.disparo = disparo;
-	Entidad.call(this, this.sprite, juego, x, y);
+	Entidad.call(this, juego, x, y);
 }
 
 VacaAbajo.prototype = new Entidad();
@@ -102,10 +102,10 @@ VacaAbajo.prototype.dibujar = function(ctx) {
 };
 
 function VacaDisparo(juego, x, y, disparo) {
-	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.jpg');
-	this.animation = new Animation(this.sprite, 100, 100, false);
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.jpg');
+	this.animation = new Animation(this.imagen, 100, 100, false);
 	this.disparo = disparo;
-	Entidad.call(this, this.sprite, juego, x, y);
+	Entidad.call(this, juego, x, y);
 }
 
 VacaDisparo.prototype = new Entidad();

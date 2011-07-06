@@ -26,7 +26,8 @@ Vaca.prototype.actualizar = function() {
 		}
 		else {
 			//Disparar
-			console.log("disparar");
+			this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, disparo));
+			this.remover = true;
 		}
 	}
 	Entidad.prototype.actualizar.call(this);
@@ -59,6 +60,7 @@ VacaArriba.prototype.constructor = VacaArriba;
 
 VacaArriba.prototype.actualizar = function() {
 	if(this.y < this.disparo.y) {
+		this.y = this.disparo.y
 		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
 		this.remover = true;
 	}
@@ -85,6 +87,7 @@ VacaAbajo.prototype.constructor = VacaAbajo;
 
 VacaAbajo.prototype.actualizar = function() {
 	if(this.y > this.disparo.y) {
+		this.y = this.disparo.y
 		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
 		this.remover = true;
 	}

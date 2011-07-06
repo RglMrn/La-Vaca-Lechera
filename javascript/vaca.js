@@ -59,7 +59,7 @@ VacaArriba.prototype.constructor = VacaArriba;
 
 VacaArriba.prototype.actualizar = function() {
 	if(this.y < this.disparo.y) {
-		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
 		this.remover = true;
 	}
 	else {
@@ -85,7 +85,7 @@ VacaAbajo.prototype.constructor = VacaAbajo;
 
 VacaAbajo.prototype.actualizar = function() {
 	if(this.y > this.disparo.y) {
-		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
 		this.remover = true;
 	}
 	else {
@@ -95,5 +95,27 @@ VacaAbajo.prototype.actualizar = function() {
 }
 
 VacaAbajo.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+};
+
+function VacaDisparo(juego, x, y, disparo) {
+	this.sprite = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.jpg');
+	this.animation = new Animation(this.sprite, 100, 100, false);
+	this.disparo = disparo;
+	Entidad.call(this, this.sprite, juego, x, y);
+}
+
+VacaDisparo.prototype = new Entidad();
+VacaDisparo.prototype.constructor = VacaDisparo;
+
+VacaDisparo.prototype.actualizar = function() {
+	if(this.animation.isDone()) {
+		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.remover = true;
+	}
+	Entidad.prototype.actualizar.call(this);
+}
+
+VacaDisparo.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
 };

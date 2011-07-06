@@ -1,12 +1,14 @@
-function Chorro(imagen, juego, x, y) { //Entidad Chorro
-	Entidad.call(this, imagen, juego, x, y); //Obteniendo los atributos de Entidad
+function Chorro(juego, x, y) { //Entidad Chorro
+	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro.svg');
+	this.speed = 0.4
 }
 
 Chorro.prototype = new Entidad();
 Chorro.prototype.constructor = Chorro;
 
 Chorro.prototype.actualizar = function() {//Logica de actualizar la posicion del Chorro
-	//Logica propia
+	this.x -= this.speed * this.juego.clockTick;
 	Entidad.prototype.actualizar.call(this);
 };
 

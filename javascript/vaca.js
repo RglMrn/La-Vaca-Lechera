@@ -114,6 +114,7 @@ VacaDisparo.prototype.constructor = VacaDisparo;
 VacaDisparo.prototype.actualizar = function() {
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y));
 		this.remover = true;
 	}
 	Entidad.prototype.actualizar.call(this);

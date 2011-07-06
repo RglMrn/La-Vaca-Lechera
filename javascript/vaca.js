@@ -12,7 +12,7 @@ Vaca.prototype = new Entidad();
 Vaca.prototype.constructor = Vaca;
 
 Vaca.prototype.actualizar = function() {
-	if(this.animation.isDone()) {
+	if(this.animation.willBeDone(this.juego.clock.maxStep)){
 		var disparo = this.elegirDisparo();
 		if(disparo.y > this.y) {
 			//Mover hacia abajo
@@ -109,7 +109,7 @@ VacaDisparo.prototype = new Entidad();
 VacaDisparo.prototype.constructor = VacaDisparo;
 
 VacaDisparo.prototype.actualizar = function() {
-	if(this.animation.isDone()) {
+	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
 		this.remover = true;
 	}

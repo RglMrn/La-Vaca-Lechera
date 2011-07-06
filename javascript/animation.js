@@ -36,3 +36,7 @@ Animation.prototype.currentFrame = function() {
 Animation.prototype.isDone = function() {
     return (this.elapsedTime >= this.totalTime);
 }
+
+Animation.prototype.willBeDone = function(tick) {
+	return (this.elapsedTime + tick >= this.totalTime);
+}

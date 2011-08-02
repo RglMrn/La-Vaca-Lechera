@@ -5,6 +5,7 @@ function Cubeta(juego, x, y) { //Entidad Cubeta
 	this.largo = this.imagen.height;
 	this.dx = 0;
 	this.dy = 0;
+  this.radius = this.imagen.height/2;
 }
 
 Cubeta.prototype = new Entidad();

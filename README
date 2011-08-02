@@ -1,13 +1,11 @@
 Lo que tienen que saber:
--Dividí cada clase en un js aparte para que probaramos como sería trabajarlo así.
- El codigo que tiene todo junto sigue estando ahi solo que se llama code.js
 
--El HTML importa dos javascripts: vacalechera.js y app.js.
- vacalechera.js contiene una funcion para importar los js de cada clase.
- app.js contiene el código de prueba o lo que vamos a ejecutar realmente.
+-El HTML importa dos javascripts: vacalechera_scripts.js y vacalechera_app.js.
+ vacalechera_scripts.js contiene una funcion para importar los js de cada clase.
+ vacalechera_app.js contiene el código de prueba o lo que vamos a ejecutar realmente.
 
 -Cuando quieran utilizar una imagen (cargarla con el assetManager) el path que le tienen que dar
- es en base al HTML, no al JS o aunque sea eso demostraron mis pruebas.
+ es en base al HTML, no al JS.
 
 -Las imágenes que estoy utilizando para probar el codigo son completamente placeholders, asi que no
  piensen que vamos a estar utilizando alguna de esas (aunque sea no por ahora).

@@ -3,9 +3,6 @@ function Vaca(juego, x, y) {
 	Entidad.call(this, juego, x, y);
 	var espera = 1000; //Tiempo antes de siguiente acción
 	this.animation = new Animation(this.imagen, 100, espera, false);
-	//Opciones para los disparos
-	this.alturas = [100, 250, 350];
-	this.distancias = [300, 400, 500];
 }
 
 Vaca.prototype = new Entidad();
@@ -38,11 +35,9 @@ Vaca.prototype.dibujar = function(ctx) {
 };
 
 Vaca.prototype.elegirDisparo = function() {
-	var altura_rand = Math.floor(Math.random()*this.alturas.length);
-	var distancia_rand = Math.floor(Math.random()*this.distancias.length);
 	disparo = {
-		"x":this.distancias[distancia_rand],
-		"y":this.alturas[altura_rand]
+		"x":Math.floor(Math.random()*600),
+		"y":100+Math.floor(Math.random()*350)
 	}
 	return disparo;
 }

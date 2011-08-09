@@ -5,7 +5,7 @@ function Vaca(juego, x, y) {
 	this.animation = new Animation(this.imagen, 100, espera, false);
 	//Opciones para los disparos
 	this.alturas = [100, 250, 350];
-	this.distancias = [200, 500, 700];
+	this.distancias = [300, 400, 500];
 }
 
 Vaca.prototype = new Entidad();
@@ -115,6 +115,7 @@ VacaDisparo.prototype.actualizar = function() {
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
 		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y, this.disparo));
+    this.juego.lanzados++;
 		this.remover = true;
 	}
 	Entidad.prototype.actualizar.call(this);

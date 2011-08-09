@@ -23,7 +23,7 @@ ASSET_MANAGER.queueDownload("./imagenes/chorro.svg");
 ASSET_MANAGER.downloadAll(function() {
 
     vacalechera = new Juego(ctx);
-    vaca = new Vaca(vacalechera, 800, 200);
+    vaca = new Vaca(vacalechera, 700, 200);
     cubeta = new Cubeta(vacalechera, 200, 200);
     window.addEventListener('keydown',presionoKey,true);
     vacalechera.addEntidad(vaca);

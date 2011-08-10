@@ -29,5 +29,8 @@ ASSET_MANAGER.downloadAll(function() {
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(cubeta);
     
+    parabola = new Parabola(vacalechera);
+    vacalechera.addEntidad(parabola);
+    
     vacalechera.iniciar();
 });

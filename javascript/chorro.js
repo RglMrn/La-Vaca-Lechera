@@ -1,34 +1,47 @@
-function Chorro(juego, x, y, disparo) { //Entidad Chorro
-	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro.svg');
-	this.speed = 0.4
-  this.disparo = disparo;
+function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
+  this.xInicial = xInicial;
+  this.yInicial = yInicial;
+  this.tiempoTotal = tiempoTotal;
+  this.xFinal = xFinal;
+  
+  this.gravedad = 1/10000;
+  this.elapsedTime = 0;
+  
+  var deltaX = Math.abs(xFinal - xInicial);
+  this.velocidadX = deltaX / tiempoTotal;
+  this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
+  
+  Entidad.call(this, juego, this.xInicial, this.yInicial);
+  this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro.png');
   this.radius = this.imagen.height/2;
+  var espera = 100;
+	this.animation = new Animation(this.imagen, 335, espera, true);
+  console.log("Inicial:"+this.x+","+this.y);
 }
 
 Chorro.prototype = new Entidad();
 Chorro.prototype.constructor = Chorro;
 
-Chorro.prototype.actualizar = function() {//Logica de actualizar la posicion del Chorro
+Chorro.prototype.actualizar = function() {  
+  this.elapsedTime += this.juego.clockTick;
+  this.x = this.xInicial - this.velocidadX * this.elapsedTime;
+  this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
+          this.gravedad * this.elapsedTime * this.elapsedTime;
+  console.log(this.x+","+this.y);
   //Si ya llegó a su destino
-  if(this.x <= this.disparo.x) {
-    this.x = this.disparo.x;
+  if(this.y >= this.yInicial) {
     this.remover = true;
     //Detectar si se atrapó o no el chorro
     if(this.isCaught()) {  
       this.juego.atrapados++;
     }
   }
-  //Seguir moviéndose
-  else {
-    this.x -= this.speed * this.juego.clockTick;
-  }
-  Entidad.prototype.actualizar.call(this);
-};
+	Entidad.prototype.actualizar.call(this);
+}
 
-Chorro.prototype.dibujar = function(ctx) {//Logica de dibujar del Chorro
-	//Logica propia
-	Entidad.prototype.dibujar.call(this, ctx);
+Chorro.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+  Entidad.prototype.dibujar.call(this, ctx);
 };
 
 Chorro.prototype.isCaught = function() {

@@ -36,8 +36,9 @@ Vaca.prototype.dibujar = function(ctx) {
 
 Vaca.prototype.elegirDisparo = function() {
 	disparo = {
-		"x":Math.floor(Math.random()*600),
-		"y":100+Math.floor(Math.random()*350)
+		"x":50+Math.floor(Math.random()*450),
+		"y":100+Math.floor(Math.random()*300),
+    "t":7000+Math.floor(Math.random()*8000)
 	}
 	return disparo;
 }
@@ -109,7 +110,8 @@ VacaDisparo.prototype.constructor = VacaDisparo;
 VacaDisparo.prototype.actualizar = function() {
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
-		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y, this.disparo));
+		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y, 
+                                    this.disparo.t, this.disparo.x));
     this.juego.lanzados++;
 		this.remover = true;
 	}
@@ -117,47 +119,5 @@ VacaDisparo.prototype.actualizar = function() {
 }
 
 VacaDisparo.prototype.dibujar = function(ctx) {
-	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
-};
-
-
-
-
-
-
-
-
-
-
-
-function Parabola(juego) {
-  this.dix = 700;
-  this.diy = 400;
-  Entidad.call(this, juego, this.dix, this.diy);
-  
-  this.t = 5000;
-  this.g = 1/10000;
-  this.ti = this.juego.clock.gameTime;
-  this.vy = 0.5 * this.g * this.t;
-  var angulo = 70 * Math.PI / 180;
-  this.vx = this.vy * Math.cos(angulo) / Math.sin(angulo);
-  
-  this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_normal.jpg');
-  var espera = 100;
-	this.animation = new Animation(this.imagen, 100, espera, true);
-}
-
-Parabola.prototype = new Entidad();
-Parabola.prototype.constructor = Parabola;
-
-Parabola.prototype.actualizar = function() {
-  var tiempo = this.juego.clock.gameTime - this.ti;
-  this.x = this.dix - this.vx * tiempo;
-  this.y = this.diy - this.vy * tiempo + 0.5 * this.g * tiempo * tiempo;
-  console.log("x=" + this.x + " y=" + this.y);
-	Entidad.prototype.actualizar.call(this);
-}
-
-Parabola.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
 };

@@ -16,7 +16,6 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
   this.radius = this.imagen.height/2;
   var espera = 100;
 	this.animation = new Animation(this.imagen, 335, espera, true);
-  console.log("Inicial:"+this.x+","+this.y);
 }
 
 Chorro.prototype = new Entidad();
@@ -27,7 +26,6 @@ Chorro.prototype.actualizar = function() {
   this.x = this.xInicial - this.velocidadX * this.elapsedTime;
   this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
           this.gravedad * this.elapsedTime * this.elapsedTime;
-  console.log(this.x+","+this.y);
   //Si ya llegó a su destino
   if(this.y >= this.yInicial) {
     this.remover = true;

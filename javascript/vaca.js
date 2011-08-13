@@ -112,7 +112,7 @@ VacaDisparo.prototype.actualizar = function() {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
 		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y, 
                                     this.disparo.t, this.disparo.x));
-    this.juego.addEntidad(new Sombra(this.juego, this.x, this.y, 
+    this.juego.addEntidad(new Sombra(this.juego, this.x, this.y + this.imagen.height / 2 , 
                                     this.disparo.t, this.disparo.x));
     this.juego.lanzados++;
 		this.remover = true;

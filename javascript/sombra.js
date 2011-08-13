@@ -50,7 +50,7 @@ Sombra.prototype.dibujar = function(ctx) {
   }
   //Dibujar sombra
   ctx.beginPath();
-  ctx.fillStyle = "blue";
+  ctx.fillStyle = "black";
   ctx.arc(this.x, this.y, radius, 0, Math.PI*2, false);
   ctx.fill();
   ctx.closePath();

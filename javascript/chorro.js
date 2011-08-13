@@ -31,7 +31,10 @@ Chorro.prototype.actualizar = function() {
     this.remover = true;
     //Detectar si se atrapó o no el chorro
     if(this.isCaught()) {  
-      this.juego.atrapados++;
+        this.juego.atrapados++;
+    }
+    else {
+        this.juego.fallados++;
     }
   }
 	Entidad.prototype.actualizar.call(this);

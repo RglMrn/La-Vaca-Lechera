@@ -18,6 +18,7 @@ function Juego(ctx) { //El controlador principal del juego
     this.alto = ctx.canvas.height;
     this.lanzados = 0; //Total de chorros lanzados
     this.atrapados = 0; //Total de chorros atrapados
+    this.fallados = 0; //Total de chorros fallados
     
     this.clock = new Clock();
     this.clockTick;
@@ -61,15 +62,15 @@ Juego.prototype.actualizar = function() {
 };
 
 Juego.prototype.actualizarReloj = function() {
-    this.ctx.fillstyle = "blue";
-    this.ctx.font = "bold 10mm Arial";
-    this.ctx.fillText("Reloj: " + this.clock.gameTime / 1000, 50, 50);
+    this.ctx.font = "7mm Arial";
+    this.ctx.fillStyle = "white";  
+    this.ctx.fillText("Reloj: " + this.clock.gameTime / 1000, 50, 30);
 }
 
 Juego.prototype.actualizarContador = function() {
-  this.ctx.fillstyle = "blue";
-  this.ctx.font = "bold 10mm Arial";
-  this.ctx.fillText("Contador: " + this.atrapados + "/" + this.lanzados, 50, 300);
+  this.ctx.font = "7mm Arial";
+  this.ctx.fillStyle = "blue"; 
+  this.ctx.fillText("Atrapados: " + this.atrapados + "  Fallados: " + this.fallados, 300, 30);
 }
 
 Juego.prototype.loop = function() { //loop del juego que llama a los actualizar y dibujar de las entidades

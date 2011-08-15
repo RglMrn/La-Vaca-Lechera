@@ -5,7 +5,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.tiempoTotal = tiempoTotal;
     this.xFinal = xFinal;
 
-    this.gravedad = 1/50000;
+    this.gravedad = 1/10000;
     this.elapsedTime = 0;
 
     var deltaX = Math.abs(xFinal - xInicial);
@@ -73,8 +73,8 @@ Chorro.prototype.hayColision = function(cubeta) {
 
 Chorro.prototype.rotarAndDibujar = function(ctx) { 
     ctx.save();
-    ctx.translate(this.x + this.imagen.width/2  ,this.y + this.imagen.height/2);
+    ctx.translate(this.x ,this.y);
 	ctx.rotate(this.angulo);
-    this.animation.drawFrame(this.juego.clockTick, ctx,  -this.imagen.width/2, -this.imagen.height/2);
+    this.animation.drawFrame(this.juego.clockTick, ctx,  0, 0);
     ctx.restore(); 
 };

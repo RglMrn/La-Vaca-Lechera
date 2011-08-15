@@ -5,7 +5,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.tiempoTotal = tiempoTotal;
     this.xFinal = xFinal;
 
-    this.gravedad = 1/10000;
+    this.gravedad = 1/50000;
     this.elapsedTime = 0;
 
     var deltaX = Math.abs(xFinal - xInicial);
@@ -23,17 +23,19 @@ Chorro.prototype = new Entidad();
 Chorro.prototype.constructor = Chorro;
 
 Chorro.prototype.actualizar = function() {  
-  this.elapsedTime += this.juego.clockTick;
+  
 
-  this.x = this.xInicial - this.velocidadX * this.elapsedTime;
-  this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
-          this.gravedad * this.elapsedTime * this.elapsedTime;
-  this.angulo = Math.atan(this.velocidadY / this.velocidadX + 
+	this.x = this.xInicial - this.velocidadX * this.elapsedTime;
+	this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
+		  this.gravedad * this.elapsedTime * this.elapsedTime;
+	this.angulo = Math.atan(this.velocidadY / this.velocidadX + 
 						this.gravedad * this.x / Math.pow(this.velocidadX,2) -
-						this.gravedad * this.xInicial / Math.pow(this.velocidadX,2) )
+						this.gravedad * this.xInicial / Math.pow(this.velocidadX,2) );
 
+	this.elapsedTime += this.juego.clockTick;
+	
   //Si ya llegó a su destino
-  if(this.y >= this.yInicial) {
+  if(this.y > this.yInicial) {
     this.remover = true;
     //Detectar si se atrapó o no el chorro
     if(this.isCaught()) {  
@@ -71,8 +73,8 @@ Chorro.prototype.hayColision = function(cubeta) {
 
 Chorro.prototype.rotarAndDibujar = function(ctx) { 
     ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.angulo + Math.PI);
-    this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    ctx.translate(this.x + this.imagen.width/2  ,this.y + this.imagen.height/2);
+	ctx.rotate(this.angulo);
+    this.animation.drawFrame(this.juego.clockTick, ctx,  -this.imagen.width/2, -this.imagen.height/2);
     ctx.restore(); 
 };

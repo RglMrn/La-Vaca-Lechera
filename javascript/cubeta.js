@@ -51,6 +51,9 @@ Cubeta.prototype.actualizar = function() {//Logica de actualizar la posicion de 
 };
 
 Cubeta.prototype.dibujar = function(ctx) {//Logica de dibujar de la cubeta
-	//Logica propia
+	var x = this.x - this.imagen.width/2;
+    var y = this.y - this.imagen.height/2;
+    ctx.drawImage(this.imagen, x, y);
+
 	Entidad.prototype.dibujar.call(this, ctx);
 };

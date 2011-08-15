@@ -1,21 +1,22 @@
 function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
-  this.xInicial = xInicial;
-  this.yInicial = yInicial;
-  this.tiempoTotal = tiempoTotal;
-  this.xFinal = xFinal;
-  
-  this.gravedad = 1/10000;
-  this.elapsedTime = 0;
-  
-  var deltaX = Math.abs(xFinal - xInicial);
-  this.velocidadX = deltaX / tiempoTotal;
-  this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
-  
-  Entidad.call(this, juego, this.xInicial, this.yInicial);
-  this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro.png');
-  this.radius = this.imagen.height/2;
-  var espera = 100;
-	this.animation = new Animation(this.imagen, 335, espera, true);
+    this.xInicial = xInicial;
+    this.yInicial = yInicial;
+    this.angulo = 0;
+    this.tiempoTotal = tiempoTotal;
+    this.xFinal = xFinal;
+
+    this.gravedad = 1/10000;
+    this.elapsedTime = 0;
+
+    var deltaX = Math.abs(xFinal - xInicial);
+    this.velocidadX = deltaX / tiempoTotal;
+    this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
+
+    Entidad.call(this, juego, this.xInicial, this.yInicial);
+    this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro_chico.png');
+    this.radius = this.imagen.height/2;
+    var espera = 100;
+    this.animation = new Animation(this.imagen, 67, espera, true);
 }
 
 Chorro.prototype = new Entidad();
@@ -23,9 +24,14 @@ Chorro.prototype.constructor = Chorro;
 
 Chorro.prototype.actualizar = function() {  
   this.elapsedTime += this.juego.clockTick;
+
   this.x = this.xInicial - this.velocidadX * this.elapsedTime;
   this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
           this.gravedad * this.elapsedTime * this.elapsedTime;
+  this.angulo = Math.atan(this.velocidadY / this.velocidadX + 
+						this.gravedad * this.x / Math.pow(this.velocidadX,2) -
+						this.gravedad * this.xInicial / Math.pow(this.velocidadX,2) )
+
   //Si ya llegó a su destino
   if(this.y >= this.yInicial) {
     this.remover = true;
@@ -41,8 +47,8 @@ Chorro.prototype.actualizar = function() {
 }
 
 Chorro.prototype.dibujar = function(ctx) {
-	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
-  Entidad.prototype.dibujar.call(this, ctx);
+	this.rotarAndDibujar(ctx);
+	Entidad.prototype.dibujar.call(this, ctx);
 };
 
 Chorro.prototype.isCaught = function() {
@@ -62,3 +68,11 @@ Chorro.prototype.hayColision = function(cubeta) {
         (this.radius + cubeta.radius);
     return distance_squared < radii_squared;
 }
+
+Chorro.prototype.rotarAndDibujar = function(ctx) { 
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angulo + Math.PI);
+    this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    ctx.restore(); 
+};

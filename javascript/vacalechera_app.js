@@ -17,6 +17,7 @@ ASSET_MANAGER.queueDownload('./imagenes/vaca_arriba.jpg');
 ASSET_MANAGER.queueDownload('./imagenes/vaca_abajo.png');
 ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo_small.jpeg");
 ASSET_MANAGER.queueDownload("./imagenes/chorro.png");
+ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
 
 
 

@@ -23,3 +23,5 @@ Entidad.prototype.dibujar = function(ctx) { //La logica basica de dibujo de las 
     ctx.closePath();
 	}
 };
+
+

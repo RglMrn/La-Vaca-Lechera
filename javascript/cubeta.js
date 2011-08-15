@@ -5,7 +5,10 @@ function Cubeta(juego, x, y) { //Entidad Cubeta
 	this.largo = this.imagen.height;
 	this.dx = 0;
 	this.dy = 0;
-  this.radius = this.imagen.height/2;
+  //Radio de captura de la cubeta
+  this.offsetCubetaX = 30;
+  this.offsetCubetaY = -25;
+  this.radioCubeta = this.imagen.height/4;
 }
 
 Cubeta.prototype = new Entidad();
@@ -36,8 +39,7 @@ Cubeta.prototype.moverCubeta = function(evt) {//Evento que sera llamado cuando s
     }
 };
 
-Cubeta.prototype.actualizar = function() {//Logica de actualizar la posicion de la cubeta
-	//Logica propia
+Cubeta.prototype.actualizar = function() {
 	if (((this.x + this.dx) > 0 + this.ancho/2  && (this.x + this.dx) < this.juego.ancho - this.ancho/2) && 
             ((this.y + this.dy) > 0 + this.largo/2 && (this.y + this.dy) < this.juego.alto - this.largo/2)) {
         this.x += this.dx;
@@ -45,15 +47,36 @@ Cubeta.prototype.actualizar = function() {//Logica de actualizar la posicion de 
         this.dx = 0;
         this.dy = 0;
     }
-    
-    
+
 	Entidad.prototype.actualizar.call(this);
 };
 
 Cubeta.prototype.dibujar = function(ctx) {//Logica de dibujar de la cubeta
-	var x = this.x - this.imagen.width/2;
+    var x = this.x - this.imagen.width/2;
     var y = this.y - this.imagen.height/2;
     ctx.drawImage(this.imagen, x, y);
 
-	Entidad.prototype.dibujar.call(this, ctx);
+    //Dibujar circulo de guia
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    ctx.arc(this.x+this.offsetCubetaX, this.y+this.offsetCubetaY, 
+        this.radioCubeta, 0, Math.PI*2, false);
+    ctx.stroke();
+    ctx.closePath();
 };
+
+
+Cubeta.prototype.atrapoChorro = function(chorro) {
+    //Posicion de la cubeta
+    var cubetaX = this.x + this.offsetCubetaX;
+    var cubetaY = this.y + this.offsetCubetaY;
+    
+    if( Math.abs(cubetaX - chorro.x) < this.radioCubeta &&
+      Math.abs(cubetaY - chorro.y) < this.radioCubeta) {
+      return true;  
+    }
+    else {
+      return false;
+    }
+}
+

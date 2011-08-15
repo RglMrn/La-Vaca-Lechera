@@ -36,6 +36,7 @@ Chorro.prototype.actualizar = function() {
 	
   //Si ya llegó a su destino
   if(this.y > this.yInicial) {
+    this.y = this.yInicial;
     this.remover = true;
     //Detectar si se atrapó o no el chorro
     if(this.isCaught()) {  
@@ -56,19 +57,11 @@ Chorro.prototype.dibujar = function(ctx) {
 Chorro.prototype.isCaught = function() {
   for (var i = 0; i < this.juego.entidades.length; i++) {
     var cubeta = this.juego.entidades[i];
-    if (cubeta instanceof Cubeta && this.hayColision(cubeta)) {
+    if (cubeta instanceof Cubeta && cubeta.atrapoChorro(this)) {
       return true;
     }
   }
   return false;
-}
-
-Chorro.prototype.hayColision = function(cubeta) {
-    var distance_squared = (((this.x - cubeta.x) * 
-        (this.x - cubeta.x)) + ((this.y - cubeta.y) * (this.y - cubeta.y)));
-    var radii_squared = (this.radius + cubeta.radius) * 
-        (this.radius + cubeta.radius);
-    return distance_squared < radii_squared;
 }
 
 Chorro.prototype.rotarAndDibujar = function(ctx) { 

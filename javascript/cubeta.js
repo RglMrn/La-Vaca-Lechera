@@ -40,14 +40,24 @@ Cubeta.prototype.moverCubeta = function(evt) {//Evento que sera llamado cuando s
 };
 
 Cubeta.prototype.actualizar = function() {
-	if (((this.x + this.dx) > 0 + this.ancho/2  && (this.x + this.dx) < this.juego.ancho - this.ancho/2) && 
-            ((this.y + this.dy) > 0 + this.largo/2 && (this.y + this.dy) < this.juego.alto - this.largo/2)) {
-        this.x += this.dx;
-        this.y += this.dy;  
-        this.dx = 0;
-        this.dy = 0;
-    }
-
+  limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":this.largo/2, 
+    "abajo":450-this.largo/2}
+  this.x += this.dx;
+  this.y += this.dy;
+  this.dx = this.dy = 0;
+  
+  if(this.x < limites.izq) {
+    this.x = limites.izq;
+  }
+  else if(this.x > limites.der) {
+    this.x = limites.der;
+  }
+  if(this.y < limites.arriba) {
+    this.y = limites.arriba;
+  }
+  else if(this.y > limites.abajo) {
+    this.y = limites.abajo;
+  }
 	Entidad.prototype.actualizar.call(this);
 };
 

@@ -53,7 +53,7 @@ Vaca.prototype.elegirDisparo = function() {
 	var intentos = 0;
 	do {
 		var disparo = {
-			"x":50+Math.floor(Math.random()*450),
+			"x":100+Math.floor(Math.random()*400),
 			"y":100+Math.floor(Math.random()*300),
 			"t":7000+Math.floor(Math.random()*8000)
 		}

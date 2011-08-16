@@ -11,20 +11,35 @@ Vaca.prototype.constructor = Vaca;
 Vaca.prototype.actualizar = function() {
 	if(this.animation.willBeDone(this.juego.clock.maxStep)){
 		var disparo = this.elegirDisparo();
-		if(disparo.y > this.y) {
-			//Mover hacia abajo
-			this.juego.addEntidad(new VacaAbajo(this.juego, this.x, this.y, disparo));
-			this.remover = true;
-		}
-		else if(disparo.y < this.y) {
-			//Mover hacia arriba
-			this.juego.addEntidad(new VacaArriba(this.juego, this.x, this.y, disparo));
-			this.remover = true;
+		if(disparo != null) {
+			if(disparo.y > this.y) {
+				//Mover hacia abajo
+				this.juego.addEntidad(new VacaAbajo(this.juego, this.x, this.y, disparo.y, disparo));
+				this.remover = true;
+			}
+			else if(disparo.y < this.y) {
+				//Mover hacia arriba
+				this.juego.addEntidad(new VacaArriba(this.juego, this.x, this.y, disparo.y, disparo));
+				this.remover = true;
+			}
+			else {
+				//Disparar
+				this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, disparo));
+				this.remover = true;
+			}
 		}
 		else {
-			//Disparar
-			this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, disparo));
-			this.remover = true;
+			var nuevaY = 100+Math.floor(Math.random()*300);
+			if(nuevaY > this.y) {
+				//Mover hacia abajo
+				this.juego.addEntidad(new VacaAbajo(this.juego, this.x, this.y, nuevaY, disparo));
+				this.remover = true;
+			}
+			else if(nuevaY < this.y) {
+				//Mover hacia arriba
+				this.juego.addEntidad(new VacaArriba(this.juego, this.x, this.y, nuevaY, disparo));
+				this.remover = true;
+			}
 		}
 	}
 	Entidad.prototype.actualizar.call(this);
@@ -35,19 +50,39 @@ Vaca.prototype.dibujar = function(ctx) {
 };
 
 Vaca.prototype.elegirDisparo = function() {
-	disparo = {
-		"x":50+Math.floor(Math.random()*450),
-		"y":100+Math.floor(Math.random()*300),
-    "t":7000+Math.floor(Math.random()*8000)
+	var intentos = 0;
+	do {
+		var disparo = {
+			"x":50+Math.floor(Math.random()*450),
+			"y":100+Math.floor(Math.random()*300),
+			"t":7000+Math.floor(Math.random()*8000)
+		}
+		var aceptable = true;
+		var tiempoLlegada = disparo.t + this.juego.getTiempoJuego();
+		
+		for (var i = 0; i < this.juego.tiemposLlegada.length; i++) { //Revisa si existe algun chorro que caera en un rango de 
+			if((tiempoLlegada - 3000) <= this.juego.tiemposLlegada[i] &&  //-3 a +3 segundos del tiempo generado 
+				this.juego.tiemposLlegada[i] <= (tiempoLlegada + 3000)) {
+				aceptable = false;	
+				intentos++;
+			}
+		}
+	}while (aceptable == false && intentos <= 10);
+	if(aceptable == true) {
+		this.juego.tiemposLlegada.push(tiempoLlegada);
+		return disparo;
 	}
-	return disparo;
+	else {
+		return null;
+	}
 }
 
-function VacaArriba(juego, x, y, disparo) {
+function VacaArriba(juego, x, y, yFinal,disparo ) {
 	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_arriba.jpg');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 100, 100, true);
 	this.disparo = disparo;
+	this.yFinal = yFinal;
 	Entidad.call(this, juego, x, y);
 }
 
@@ -55,9 +90,14 @@ VacaArriba.prototype = new Entidad();
 VacaArriba.prototype.constructor = VacaArriba;
 
 VacaArriba.prototype.actualizar = function() {
-	if(this.y < this.disparo.y) {
-		this.y = this.disparo.y
-		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
+	if(this.y < this.yFinal) {
+		this.y = this.yFinal
+		if(this.disparo != null){
+			this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
+		}
+		else {
+			this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		}
 		this.remover = true;
 	}
 	else {
@@ -70,11 +110,12 @@ VacaArriba.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
 };
 
-function VacaAbajo(juego, x, y, disparo) {
+function VacaAbajo(juego, x, y,yFinal ,disparo) {
 	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_abajo.png');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 100, 100, true);
 	this.disparo = disparo;
+	this.yFinal = yFinal;
 	Entidad.call(this, juego, x, y);
 }
 
@@ -82,9 +123,14 @@ VacaAbajo.prototype = new Entidad();
 VacaAbajo.prototype.constructor = VacaAbajo;
 
 VacaAbajo.prototype.actualizar = function() {
-	if(this.y > this.disparo.y) {
-		this.y = this.disparo.y
-		this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
+	if(this.y > this.yFinal) {
+		this.y = this.yFinal
+		if(this.disparo != null){
+			this.juego.addEntidad(new VacaDisparo(this.juego, this.x, this.y, this.disparo));
+		}
+		else {
+			this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
+		}
 		this.remover = true;
 	}
 	else {

@@ -7,9 +7,11 @@
 	</head>
 	<body style = "margin : 0;">
 	    
-	    <div id="content" style = "width : 800px; margin : auto;">
-            <canvas id="fondo" width="800" height="450" style="background: green"></canvas>
-        </div>
+	    <div id="content" style = "width:800px; margin : auto; position:relative;">
+	      <div style="color:white; font-size:25px; position:absolute; top:420px; left:190px; background-color:red; padding:20px;">Loading...</div>
+	      <img src="./imagenes/portada.jpg" width="800" height="450" alt="portada" style="display:block;" />
+            <canvas id="fondo" width="800" height="450" style="display:none; background:green"></canvas>
+      </div>
         <script type="text/javascript" src="./javascript/vacalechera_scripts.js"></script>
         <script type="text/javascript" src="./javascript/vacalechera_app.js"></script>
 	</body>

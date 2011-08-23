@@ -1,6 +1,21 @@
-//Pruebas
+var loaded = false;
+var iniciado = false;
 function presionoKey(evt) {
+  if(iniciado) {
     cubeta.moverCubeta(evt);
+  }
+  else {
+    if(loaded) {
+      var texto = document.getElementById("content").getElementsByTagName("div")[0];
+      var imagen = document.getElementById("content").getElementsByTagName("img")[0];
+      var canvas = document.getElementById("fondo");
+      canvas.style.display = "block";
+      var container = document.getElementById("content");
+      container.removeChild(imagen); container.removeChild(texto);
+      vacalechera.iniciar();
+      iniciado = true;
+    }
+  }
 }
 
 var canvas = document.getElementById('fondo');
@@ -22,11 +37,12 @@ ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
 
 
 ASSET_MANAGER.downloadAll(function() {
+    document.getElementById("content").getElementsByTagName("div")[0].innerHTML = "Presiona cualquier tecla para continuar"
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 700, 200);
     cubeta = new Cubeta(vacalechera, 200, 200);
     window.addEventListener('keydown',presionoKey,true);
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(cubeta);    
-    vacalechera.iniciar();
+    loaded = true;
 });

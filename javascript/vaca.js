@@ -144,7 +144,7 @@ VacaAbajo.prototype.dibujar = function(ctx) {
 };
 
 function VacaDisparo(juego, x, y, disparo) {
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.jpg');
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.png');
 	this.animation = new Animation(this.imagen, 100, 100, false);
 	this.disparo = disparo;
 	Entidad.call(this, juego, x, y);

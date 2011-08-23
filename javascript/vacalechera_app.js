@@ -28,6 +28,7 @@ var cubeta;
 
 ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.jpg");
 ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.jpg");
+ASSET_MANAGER.queueDownload('./imagenes/vaca_disparo.png');
 ASSET_MANAGER.queueDownload('./imagenes/vaca_arriba.jpg');
 ASSET_MANAGER.queueDownload('./imagenes/vaca_abajo.png');
 ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo_small.jpeg");
@@ -36,10 +37,12 @@ ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
 
 
 
+
+
 ASSET_MANAGER.downloadAll(function() {
     document.getElementById("content").getElementsByTagName("div")[0].innerHTML = "Presiona cualquier tecla para continuar"
     vacalechera = new Juego(ctx);
-    vaca = new Vaca(vacalechera, 700, 200);
+    vaca = new Vaca(vacalechera, 740, 200);
     cubeta = new Cubeta(vacalechera, 200, 200);
     window.addEventListener('keydown',presionoKey,true);
     vacalechera.addEntidad(vaca);

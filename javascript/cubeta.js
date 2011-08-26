@@ -39,6 +39,12 @@ Cubeta.prototype.moverCubeta = function(evt) {//Evento que sera llamado cuando s
     }
 };
 
+Cubeta.prototype.moverCubeta2 = function(evt) {
+	this.x = evt.layerX;
+	this.y = evt.y;
+	
+}
+
 Cubeta.prototype.actualizar = function() {
   limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":this.largo/2, 
     "abajo":450-this.largo/2}

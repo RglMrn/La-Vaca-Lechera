@@ -1,6 +1,6 @@
 function Cubeta(juego, x, y) { //Entidad Cubeta
 	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/granjero_cubeta_abajo_small.jpeg');
+	this.imagen = ASSET_MANAGER.getAsset('./imagenes/granjero_cubeta_arriba.png');
 	this.ancho = this.imagen.width;
 	this.largo = this.imagen.height;
 	this.dx = 0;
@@ -41,16 +41,17 @@ Cubeta.prototype.moverCubeta = function(evt) {//Evento que sera llamado cuando s
 
 Cubeta.prototype.moverCubeta2 = function(evt) {
 	this.x = evt.layerX;
-	this.y = evt.y;
+	this.y = evt.layerY;
 	
 }
 
 Cubeta.prototype.actualizar = function() {
-  limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":this.largo/2, 
+  limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":215 - this.largo/2, 
     "abajo":450-this.largo/2}
-  this.x += this.dx;
-  this.y += this.dy;
-  this.dx = this.dy = 0;
+	
+	this.x += this.dx;
+	this.y += this.dy;
+	this.dx = this.dy = 0;
   
   if(this.x < limites.izq) {
     this.x = limites.izq;

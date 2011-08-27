@@ -47,7 +47,8 @@ var cubeta;
 ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png");
 ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png");
 ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png');
-ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo_small.jpeg");
+ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo.png");
+ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png");
 ASSET_MANAGER.queueDownload("./imagenes/chorro.png");
 ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
 

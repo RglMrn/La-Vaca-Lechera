@@ -54,15 +54,16 @@ Vaca.prototype.elegirDisparo = function() {
 	do {
 		var disparo = {
 			"x":100+Math.floor(Math.random()*400),
-			"y":50+Math.floor(Math.random()*300),
+			"y":215+Math.floor(Math.random()*135),
 			"t":7000+Math.floor(Math.random()*8000)
 		}
 		var aceptable = true;
 		var tiempoLlegada = disparo.t + this.juego.getTiempoJuego();
+		var tiempoEntreChorros = 3000;
 		
 		for (var i = 0; i < this.juego.tiemposLlegada.length; i++) { //Revisa si existe algun chorro que caera en un rango de 
-			if((tiempoLlegada - 3000) <= this.juego.tiemposLlegada[i] &&  //-3 a +3 segundos del tiempo generado 
-				this.juego.tiemposLlegada[i] <= (tiempoLlegada + 3000)) {
+			if((tiempoLlegada - tiempoEntreChorros) <= this.juego.tiemposLlegada[i] &&  //-3 a +3 segundos del tiempo generado 
+				this.juego.tiemposLlegada[i] <= (tiempoLlegada + tiempoEntreChorros)) {
 				aceptable = false;	
 				intentos++;
 			}

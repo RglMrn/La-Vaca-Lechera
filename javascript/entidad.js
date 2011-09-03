@@ -12,12 +12,11 @@ Entidad.prototype.actualizar = function() { //La logica basica de actualizacion 
 Entidad.prototype.dibujar = function(ctx) { //La logica basica de dibujo de las entidades
 
     //Dibujar circulo de guia alrededor de la imagen
-    ctx.beginPath();
+    /*ctx.beginPath();
     ctx.strokeStyle = "red";
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, false);
     ctx.stroke();
-    ctx.closePath();
-	
+    ctx.closePath();*/
 };
 
 

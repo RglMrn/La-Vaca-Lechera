@@ -74,12 +74,12 @@ Cubeta.prototype.dibujar = function(ctx) {//Logica de dibujar de la cubeta
     ctx.drawImage(this.imagen, x, y);
 
     //Dibujar circulo de guia
-    ctx.beginPath();
+    /*ctx.beginPath();
     ctx.strokeStyle = "red";
     ctx.arc(this.x+this.offsetCubetaX, this.y+this.offsetCubetaY, 
         this.radioCubeta, 0, Math.PI*2, false);
     ctx.stroke();
-    ctx.closePath();
+    ctx.closePath();*/
 };
 
 

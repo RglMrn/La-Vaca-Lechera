@@ -37,22 +37,28 @@ Sombra.prototype.actualizar = function() {
 }
 
 Sombra.prototype.dibujar = function(ctx) {  
-  //El tamaño y el alpha de la sombra dependen de la distancia del chorro
-  var radius;
-  var distMax=1500;
-  if(this.distanciaChorro>distMax) {
+    //El tamaño y el alpha de la sombra dependen de la distancia del chorro
+    var radius;
+    var distMax=1500;
+
+    ctx.save();
+    if(this.distanciaChorro>distMax) {
     ctx.globalAlpha = 0;
     radius = 0;
-  }
-  else {
+    }
+    else {
     ctx.globalAlpha = 1-this.distanciaChorro/distMax;
-    radius = 50*this.distanciaChorro/distMax;
-  }
-  //Dibujar sombra
-  ctx.beginPath();
-  ctx.fillStyle = "black";
-  ctx.arc(this.x, this.y, radius, 0, Math.PI*2, false);
-  ctx.fill();
-  ctx.closePath();
-  ctx.globalAlpha = 1;
+    radius = 30*this.distanciaChorro/distMax;
+    }
+    //Dibujar sombra
+    ctx.translate(this.x, this.y);
+    ctx.scale(2, 1);
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI*2, false);    
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+
+    
 };

@@ -48,7 +48,7 @@ Sombra.prototype.dibujar = function(ctx) {
     }
     else {
     ctx.globalAlpha = 1-this.distanciaChorro/distMax;
-    radius = 30*this.distanciaChorro/distMax;
+    radius = 25*this.distanciaChorro/distMax;
     }
     //Dibujar sombra
     ctx.translate(this.x, this.y);

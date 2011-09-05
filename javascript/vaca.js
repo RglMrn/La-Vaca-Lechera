@@ -155,12 +155,15 @@ VacaDisparo.prototype = new Entidad();
 VacaDisparo.prototype.constructor = VacaDisparo;
 
 VacaDisparo.prototype.actualizar = function() {
+    var offset = 60;
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
-		this.juego.addEntidad(new Chorro(this.juego, this.x, this.y, 
+		this.juego.addEntidad(new Chorro(this.juego, this.x - offset, this.y, 
                                     this.disparo.t, this.disparo.x));
-    this.juego.addEntidad(new Sombra(this.juego, this.x, this.y + this.imagen.height / 2 , 
-                                    this.disparo.t, this.disparo.x));
+        this.juego.addEntidad(new Sombra(this.juego, this.x - offset, 
+            this.y + this.imagen.height / 2 , this.disparo.t, 
+            this.disparo.x));
+            
     this.juego.lanzados++;
 		this.remover = true;
 	}

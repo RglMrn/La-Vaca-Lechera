@@ -34,7 +34,7 @@ Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
 };
 
 Juego.prototype.addEntidad = function(entidad) {
-    this.entidades.push(entidad);
+    this.entidades.unshift(entidad);
 };
 
 Juego.prototype.dibujar = function() {

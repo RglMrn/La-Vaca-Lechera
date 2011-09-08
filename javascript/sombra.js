@@ -41,14 +41,17 @@ Sombra.prototype.dibujar = function(ctx) {
     var radius;
     var distMax=1500;
 
+    //Guardar el estado actual del canvas
     ctx.save();
+    
+    
     if(this.distanciaChorro>distMax) {
-    ctx.globalAlpha = 0;
-    radius = 0;
+      ctx.globalAlpha = 0; //Completamente transparente
+      radius = 0;
     }
     else {
-    ctx.globalAlpha = 1-this.distanciaChorro/distMax;
-    radius = 25*this.distanciaChorro/distMax;
+      ctx.globalAlpha = 1-this.distanciaChorro/distMax;
+      radius = 25*this.distanciaChorro/distMax;
     }
     //Dibujar sombra
     ctx.translate(this.x, this.y);
@@ -58,6 +61,8 @@ Sombra.prototype.dibujar = function(ctx) {
     ctx.fillStyle = "black";
     ctx.fill();
     ctx.closePath();
+    
+    //Volver al estado guardado del canvas
     ctx.restore();
 
     

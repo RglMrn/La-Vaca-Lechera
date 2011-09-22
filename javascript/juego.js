@@ -28,7 +28,14 @@ function Juego(ctx) { //El controlador principal del juego
 Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
     var that = this;
     (function gameLoop() {
+        if(that.fallados>2){
+			this.ctx.font = "7mm Arial";
+			this.ctx.fillStyle = "red"; 
+			this.ctx.fillText("Perdiste" ,400, 60);
+			}
+			else{
         that.loop();
+	}
         requestAnimFrame(gameLoop, that.ctx.canvas);
     })();
 };

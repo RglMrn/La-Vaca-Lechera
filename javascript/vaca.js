@@ -1,5 +1,5 @@
 function Vaca(juego, x, y) {
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_normal.png');
+	this.imagen = ASSET_MANAGER.getAsset('vacanormal');
 	Entidad.call(this, juego, x, y);
 	var espera = 880; //Tiempo antes de siguiente acción
 	this.animation = new Animation(this.imagen, 200, espera, false);
@@ -79,7 +79,7 @@ Vaca.prototype.elegirDisparo = function() {
 }
 
 function VacaArriba(juego, x, y, yFinal,disparo ) {
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vacaCaminaSprite.png');
+	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 200, 100, true);
 	this.disparo = disparo;

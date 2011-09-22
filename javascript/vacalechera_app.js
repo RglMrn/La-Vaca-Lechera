@@ -44,19 +44,20 @@ var vacalechera;
 var vaca;
 var cubeta;
 
-ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png");
-ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png");
-ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png');
-ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo.png");
-ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png");
-ASSET_MANAGER.queueDownload("./imagenes/chorro.png");
-ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
-
+ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png","vacanormal");
+ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png","vacadisparo");
+ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png',"vacacamina");
+ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo.png","cubetaabajo");
+ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png","cubetaarriba");
+ASSET_MANAGER.queueDownload("./imagenes/chorro.png","chorro");
+ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png","chorrochico");
+console.log('Paso por el 1');
 
 
 
 
 ASSET_MANAGER.downloadAll(function() {
+	
     document.getElementById("content").getElementsByTagName("div")[0].innerHTML = "Presiona cualquier tecla para continuar"
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 780, 200);

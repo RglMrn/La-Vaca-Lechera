@@ -1,5 +1,6 @@
 //Se encarga de cargar todas las imagenes e indicarnos si se cargaron todas exitosamente
 //o si hubo algun error.
+// Ahora las imagenes pueden ser reconocidas mediante un id
 function AssetManager() {
     this.successCount = 0;
     this.errorCount = 0;
@@ -7,8 +8,12 @@ function AssetManager() {
     this.downloadQueue = [];
 }
 
-AssetManager.prototype.queueDownload = function(path) {
-    this.downloadQueue.push(path);
+	
+AssetManager.prototype.queueDownload = function(path,id) {
+    var objeto=new Object();
+    objeto.id=id;
+    objeto.path=path;
+    this.downloadQueue.push(objeto); // crea un objeto con un id y el path de la imagen
 };
 
 AssetManager.prototype.downloadAll = function(callback) {
@@ -17,7 +22,7 @@ AssetManager.prototype.downloadAll = function(callback) {
     }
     
     for (var i = 0; i < this.downloadQueue.length; i++) {
-        var path = this.downloadQueue[i];
+        var Asset = this.downloadQueue[i];
         var img = new Image();
         var that = this;
         img.addEventListener("load", function() {
@@ -33,13 +38,13 @@ AssetManager.prototype.downloadAll = function(callback) {
                 callback();
             };
         }, false);
-        img.src = path;
-        this.cache[path] = img;
+        img.src = Asset.path;
+        this.cache[Asset.id] = img; //Guarda la imagen en cache con el id como indice
     }
 };
 
-AssetManager.prototype.getAsset = function(path) {
-    return this.cache[path];
+AssetManager.prototype.getAsset = function(id) {
+    return this.cache[id];
 };
 
 AssetManager.prototype.isDone = function() {

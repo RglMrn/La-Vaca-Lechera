@@ -10,6 +10,7 @@ function presionoKey(evt) {
       var imagen = document.getElementById("content").getElementsByTagName("img")[0];
       var canvas = document.getElementById("fondo");
       canvas.style.display = "block";
+      canvas.style.background = 'url(./imagenes/fondo.png)';
       var container = document.getElementById("content");
       container.removeChild(imagen); container.removeChild(texto);
       vacalechera.iniciar();
@@ -28,6 +29,7 @@ function clickeo (evt) {
 		  var imagen = document.getElementById("content").getElementsByTagName("img")[0];
 		  var canvas = document.getElementById("fondo");
 		  canvas.style.display = "block";
+          canvas.style.background = 'url(./imagenes/fondo.png)';
 		  var container = document.getElementById("content");
 		  container.removeChild(imagen); container.removeChild(texto);
 		  vacalechera.iniciar();
@@ -51,6 +53,7 @@ ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo.png");
 ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png");
 ASSET_MANAGER.queueDownload("./imagenes/chorro.png");
 ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
+ASSET_MANAGER.queueDownload("./imagenes/fondo.png");
 
 
 

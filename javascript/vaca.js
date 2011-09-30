@@ -112,7 +112,7 @@ VacaArriba.prototype.dibujar = function(ctx) {
 };
 
 function VacaAbajo(juego, x, y,yFinal ,disparo) {
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vacaCaminaSprite.png');
+	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 200, 100, true);
 	this.disparo = disparo;
@@ -145,7 +145,7 @@ VacaAbajo.prototype.dibujar = function(ctx) {
 };
 
 function VacaDisparo(juego, x, y, disparo) {
-	this.imagen = ASSET_MANAGER.getAsset('./imagenes/vaca_disparo.png');
+	this.imagen = ASSET_MANAGER.getAsset('vacadisparo');
 	this.animation = new Animation(this.imagen, 200, 100, false);
 	this.disparo = disparo;
 	Entidad.call(this, juego, x, y);

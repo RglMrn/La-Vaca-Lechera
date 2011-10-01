@@ -47,17 +47,14 @@ Juego.prototype.dibujar = function() {
 };
 
 Juego.prototype.actualizar = function() {
-    for (var i = 0; i < this.entidades.length; i++) {
-        var entidad = this.entidades[i];
-        
-        if (!entidad.remover) {
-            entidad.actualizar();
-        }
-    }
-    
+
     for (var i = this.entidades.length-1; i >= 0; --i) {
+        
         if (this.entidades[i].remover) {
             this.entidades.splice(i, 1);
+        }
+        else {
+            this.entidades[i].actualizar();
         }
     }
 };

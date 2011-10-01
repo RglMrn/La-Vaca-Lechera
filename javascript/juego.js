@@ -28,7 +28,12 @@ function Juego(ctx) { //El controlador principal del juego
 Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
     var that = this;
     (function gameLoop() {
-        that.loop();
+        if (that.fallados > 9) { //evalúa si el jugador perdió
+            that.perdiste();
+        }
+        else {
+             that.loop();
+        }
         requestAnimFrame(gameLoop, that.ctx.canvas);
     })();
 };
@@ -82,3 +87,11 @@ Juego.prototype.loop = function() { //loop del juego que llama a los actualizar 
     this.actualizarReloj();
     this.actualizarContador();
 };
+
+Juego.prototype.perdiste = function() { //evalúa si el jugador perdió
+
+    this.ctx.font = "20mm Arial";
+    this.ctx.fillStyle = "red"; 
+    this.ctx.fillText("Perdiste" ,275, 225);
+};    
+    

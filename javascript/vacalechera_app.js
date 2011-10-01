@@ -46,17 +46,12 @@ var vacalechera;
 var vaca;
 var cubeta;
 
-ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png");
-ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png");
-ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png');
-ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_abajo.png");
-ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png");
-ASSET_MANAGER.queueDownload("./imagenes/chorro.png");
-ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png");
-ASSET_MANAGER.queueDownload("./imagenes/fondo.png");
-
-
-
+ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png","vacanormal");
+ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png","vacadisparo");
+ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png',"vacacamina");
+ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png","cubetaarriba");
+ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png","chorro");
+ASSET_MANAGER.queueDownload("./imagenes/fondo.png","fondo");
 
 
 ASSET_MANAGER.downloadAll(function() {

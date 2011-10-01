@@ -13,7 +13,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
 
     Entidad.call(this, juego, this.xInicial, this.yInicial);
-    this.imagen = ASSET_MANAGER.getAsset('./imagenes/chorro_chico.png');
+    this.imagen = ASSET_MANAGER.getAsset('chorro');
     this.radius = this.imagen.height/2;
     var espera = 100;
     this.animation = new Animation(this.imagen, 67, espera, true);

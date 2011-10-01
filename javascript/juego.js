@@ -39,11 +39,11 @@ Juego.prototype.addEntidad = function(entidad) {
 
 Juego.prototype.dibujar = function() {
     this.ctx.clearRect(0, 0, this.ancho, this.alto);
-    this.ctx.save(); //No se si es necesario
+    this.ctx.save();
     for (var i = 0; i < this.entidades.length; i++) {
         this.entidades[i].dibujar(this.ctx);
     }
-    this.ctx.restore(); //No se si es necesario
+    this.ctx.restore();
 };
 
 Juego.prototype.actualizar = function() {

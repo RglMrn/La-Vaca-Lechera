@@ -7,8 +7,12 @@ function AssetManager() {
     this.downloadQueue = [];
 }
 
-AssetManager.prototype.queueDownload = function(path) {
-    this.downloadQueue.push(path);
+
+AssetManager.prototype.queueDownload = function(path,id) { // crea un objeto con un id y el path de la imagen y lo adiciona al arreglo
+    var objeto=new Object();
+    objeto.id=id;
+    objeto.path=path;
+    this.downloadQueue.push(objeto); 
 };
 
 AssetManager.prototype.downloadAll = function(callback) {
@@ -17,7 +21,7 @@ AssetManager.prototype.downloadAll = function(callback) {
     }
     
     for (var i = 0; i < this.downloadQueue.length; i++) {
-        var path = this.downloadQueue[i];
+        var asset = this.downloadQueue[i];
         var img = new Image();
         var that = this;
         img.addEventListener("load", function() {
@@ -33,13 +37,13 @@ AssetManager.prototype.downloadAll = function(callback) {
                 callback();
             };
         }, false);
-        img.src = path;
-        this.cache[path] = img;
+        img.src = asset.path;
+        this.cache[asset.id] = img; //Guarda la imagen en cache con el id como indice
     }
 };
 
-AssetManager.prototype.getAsset = function(path) {
-    return this.cache[path];
+AssetManager.prototype.getAsset = function(id) {
+    return this.cache[id];
 };
 
 AssetManager.prototype.isDone = function() {

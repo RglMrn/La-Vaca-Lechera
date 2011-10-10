@@ -44,6 +44,7 @@ Chorro.prototype.actualizar = function() {
     }
     else {
         this.juego.fallados++;
+		this.juego.addEntidad(new ChorroDerramado(this.juego, this.xFinal, this.yInicial + 87 ));
     }
   }
 	Entidad.prototype.actualizar.call(this);
@@ -69,5 +70,38 @@ Chorro.prototype.rotarAndDibujar = function(ctx) {
     ctx.translate(this.x ,this.y);
 	ctx.rotate(this.angulo);
     this.animation.drawFrame(this.juego.clockTick, ctx,  0, 0);
+    ctx.restore(); 
+};
+
+function ChorroDerramado(juego, xFinal, yInicial) {
+    this.yInicial = yInicial;
+    this.xFinal = xFinal;
+    Entidad.call(this, juego, this.xFinal, this.yInicial);
+    this.imagen = ASSET_MANAGER.getAsset('chorros');
+    this.radius = this.imagen.height/2;
+    var espera = 100;
+    this.animation = new Animation(this.imagen, 107.25, espera, false);
+}
+
+ChorroDerramado.prototype.actualizar = function() {  
+
+	this.elapsedTime += this.juego.clockTick;
+	
+  //Si ya llegó a su destino
+  if(this.animation.willBeDone(this.juego.clock.maxStep)) {
+    this.y = this.yInicial;
+    this.remover = true;}
+	Entidad.prototype.actualizar.call(this);
+};
+
+ChorroDerramado.prototype.dibujar = function(ctx) {
+	this.Dibujar(ctx);
+	Entidad.prototype.dibujar.call(this, ctx);
+};
+
+ChorroDerramado.prototype.Dibujar = function(ctx) { 
+    ctx.save();
+    ctx.translate(this.x ,this.y);
+	this.animation.drawFrame(this.juego.clockTick, ctx,  0, 0);
     ctx.restore(); 
 };

@@ -52,6 +52,7 @@ ASSET_MANAGER.queueDownload('./imagenes/vacaCaminaSprite.png',"vacacamina");
 ASSET_MANAGER.queueDownload("./imagenes/granjero_cubeta_arriba.png","cubetaarriba");
 ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png","chorro");
 ASSET_MANAGER.queueDownload("./imagenes/fondo.png","fondo");
+ASSET_MANAGER.queueDownload("./imagenes/chorros.png","chorros");
 
 
 ASSET_MANAGER.downloadAll(function() {

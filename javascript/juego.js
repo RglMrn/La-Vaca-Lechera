@@ -52,14 +52,20 @@ Juego.prototype.dibujar = function() {
 };
 
 Juego.prototype.actualizar = function() {
-
+    //Se recorre dos veces para asegurarse de que entidades que deben 
+    //ser removidas no lleguen a ser dibujadas.
+    
+    for (var i = this.entidades.length-1; i >= 0; --i) {
+        
+        if (!this.entidades[i].remover) {
+            this.entidades[i].actualizar();
+        }
+    }
+    
     for (var i = this.entidades.length-1; i >= 0; --i) {
         
         if (this.entidades[i].remover) {
             this.entidades.splice(i, 1);
-        }
-        else {
-            this.entidades[i].actualizar();
         }
     }
 };

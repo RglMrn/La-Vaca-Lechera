@@ -43,6 +43,7 @@ Chorro.prototype.actualizar = function() {
         this.juego.atrapados++;
     }
     else {
+		this.juego.addEntidad(new ChorroDerramado(this.juego, this.x, this.y + 87 ));
         this.juego.fallados++;
     }
   }
@@ -70,4 +71,26 @@ Chorro.prototype.rotarAndDibujar = function(ctx) {
 	ctx.rotate(this.angulo);
     this.animation.drawFrame(this.juego.clockTick, ctx,  0, 0);
     ctx.restore(); 
+};
+
+function ChorroDerramado(juego, x, y) {
+    Entidad.call(this, juego, x, y);
+    this.imagen = ASSET_MANAGER.getAsset("chorroderramado");
+    var espera = 100;
+    this.animation = new Animation(this.imagen, 107.25, espera, false);
+}
+
+ChorroDerramado.prototype = new Entidad();
+ChorroDerramado.prototype.constructor = ChorroDerramado;
+
+ChorroDerramado.prototype.actualizar = function() {  
+  //Verifica si termino la animación
+  if(this.animation.willBeDone(this.juego.clock.maxStep)) {
+    this.remover = true;}
+	Entidad.prototype.actualizar.call(this);
+};
+
+ChorroDerramado.prototype.dibujar = function(ctx) {
+	this.animation.drawFrame(this.juego.clockTick, ctx,  this.x, this.y);
+	Entidad.prototype.dibujar.call(this, ctx);
 };

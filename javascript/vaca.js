@@ -69,7 +69,8 @@ Vaca.prototype.elegirDisparo = function() {
 			}
 		}
 	}while (aceptable == false && intentos <= 10);
-	if(aceptable == true) {
+	
+    if(aceptable == true) {
 		this.juego.tiemposLlegada.push(tiempoLlegada);
 		return disparo;
 	}
@@ -155,7 +156,7 @@ VacaDisparo.prototype = new Entidad();
 VacaDisparo.prototype.constructor = VacaDisparo;
 
 VacaDisparo.prototype.actualizar = function() {
-    var offset = 60;
+    var offset = 60;  //Ancho invisible de la vaca
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));
 		this.juego.addEntidad(new Chorro(this.juego, this.x - offset, this.y, 

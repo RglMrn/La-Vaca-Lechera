@@ -21,6 +21,7 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) {
     var index = this.currentFrame();
     var locX = x - (this.frameWidth/2) * scaleBy;
     var locY = y - (this.frameHeight/2) * scaleBy;
+    
     ctx.drawImage(this.spriteSheet,
                   index*this.frameWidth, 0,  // source from sheet
                   this.frameWidth, this.frameHeight,

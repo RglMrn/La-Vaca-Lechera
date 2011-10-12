@@ -1,14 +1,14 @@
 //Shim que se encarga de solicitar el animationFrame del browser que estemos utilizando
 //para optimizar la animacion del juego
 window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              window.oRequestAnimationFrame      ||
-              window.msRequestAnimationFrame     ||
-              function(/* function */ callback, /* DOMElement */ element){
-                window.setTimeout(callback, 1000 / 60);
-              };
+    return  window.requestAnimationFrame     ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          window.oRequestAnimationFrame      ||
+          window.msRequestAnimationFrame     ||
+          function(/* function */ callback, /* DOMElement */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
 })();
 
 function Juego(ctx) { //El controlador principal del juego
@@ -19,7 +19,7 @@ function Juego(ctx) { //El controlador principal del juego
     this.lanzados = 0; //Total de chorros lanzados
     this.atrapados = 0; //Total de chorros atrapados
     this.fallados = 0; //Total de chorros fallados
-    this.tiemposLlegada = [];
+    this.tiemposLlegada = []; //Tiempos en los que llegarán los chorros al suelo
 	
     this.clock = new Clock();
     this.clockTick;
@@ -81,9 +81,9 @@ Juego.prototype.actualizarReloj = function() {
 };
 
 Juego.prototype.actualizarContador = function() {
-  this.ctx.font = "7mm Arial";
-  this.ctx.fillStyle = "blue"; 
-  this.ctx.fillText("Atrapados: " + this.atrapados + "  Fallados: " + this.fallados, 300, 30);
+    this.ctx.font = "7mm Arial";
+    this.ctx.fillStyle = "blue"; 
+    this.ctx.fillText("Atrapados: " + this.atrapados + "  Fallados: " + this.fallados, 300, 30);
 };
 
 Juego.prototype.loop = function() { //loop del juego que llama a los actualizar y dibujar de las entidades

@@ -13,6 +13,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
 
     Entidad.call(this, juego, this.xInicial, this.yInicial);
+    
     this.imagen = ASSET_MANAGER.getAsset('chorro');
     this.radius = this.imagen.height/2;
     var espera = 100;
@@ -26,18 +27,20 @@ Chorro.prototype.actualizar = function() {
   
 
 	this.x = this.xInicial - this.velocidadX * this.elapsedTime;
-	this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
+	
+    this.y = this.yInicial - this.velocidadY * this.elapsedTime + 0.5 * 
 		  this.gravedad * this.elapsedTime * this.elapsedTime;
-	this.angulo = Math.atan(this.velocidadY / this.velocidadX + 
+	
+    this.angulo = Math.atan(this.velocidadY / this.velocidadX + 
 						this.gravedad * this.x / Math.pow(this.velocidadX,2) -
 						this.gravedad * this.xInicial / Math.pow(this.velocidadX,2) );
 
 	this.elapsedTime += this.juego.clockTick;
 	
-  //Si ya llegó a su destino
-  if(this.y > this.yInicial) {
-    this.y = this.yInicial;
-    this.remover = true;
+    //Si ya llegó a su destino
+    if(this.y > this.yInicial) {
+        this.y = this.yInicial;
+        this.remover = true;
     //Detectar si se atrapó o no el chorro
     if(this.isCaught()) {  
         this.juego.atrapados++;
@@ -56,13 +59,13 @@ Chorro.prototype.dibujar = function(ctx) {
 };
 
 Chorro.prototype.isCaught = function() {
-  for (var i = 0; i < this.juego.entidades.length; i++) {
-    var granjero = this.juego.entidades[i];
-    if (granjero instanceof Granjero && granjero.atrapoChorro(this)) {
-      return true;
+    for (var i = 0; i < this.juego.entidades.length; i++) {
+        var granjero = this.juego.entidades[i];
+        if (granjero instanceof Granjero && granjero.atrapoChorro(this)) {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 Chorro.prototype.rotarAndDibujar = function(ctx) { 
@@ -85,9 +88,9 @@ ChorroDerramado.prototype.constructor = ChorroDerramado;
 
 ChorroDerramado.prototype.actualizar = function() {  
   //Verifica si termino la animación
-  if(this.animation.willBeDone(this.juego.clock.maxStep)) {
-    this.remover = true;}
-	Entidad.prototype.actualizar.call(this);
+    if(this.animation.willBeDone(this.juego.clock.maxStep)) {
+        this.remover = true;}
+        Entidad.prototype.actualizar.call(this);
 };
 
 ChorroDerramado.prototype.dibujar = function(ctx) {

@@ -50,13 +50,15 @@ ASSET_MANAGER.queueDownload("./imagenes/chorro_derramado.png","chorroderramado")
 
 
 ASSET_MANAGER.downloadAll(function() {
+    var contenedor = document.getElementById('content');
+    
     document.getElementById("estadoLoad").innerHTML = "Presiona cualquier tecla para continuar"
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 780, 200);
     granjero = new Granjero(vacalechera, 200, 200);
     
     window.addEventListener('keydown',onKeyDown,true);
-	window.addEventListener('click',onClick,true);
+	contenedor.addEventListener('click',onClick,true);
     
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(granjero);    

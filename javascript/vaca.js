@@ -43,7 +43,7 @@ Vaca.prototype.actualizar = function() {
 		}
 	}
 	Entidad.prototype.actualizar.call(this);
-}
+};
 
 Vaca.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
@@ -77,7 +77,7 @@ Vaca.prototype.elegirDisparo = function() {
 	else {
 		return null;
 	}
-}
+};
 
 function VacaArriba(juego, x, y, yFinal,disparo ) {
 	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
@@ -106,7 +106,7 @@ VacaArriba.prototype.actualizar = function() {
 		this.y -= this.speed * this.juego.clockTick;
 	}
 	Entidad.prototype.actualizar.call(this);
-}
+};
 
 VacaArriba.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
@@ -139,7 +139,7 @@ VacaAbajo.prototype.actualizar = function() {
 		this.y += this.speed * this.juego.clockTick;
 	}
 	Entidad.prototype.actualizar.call(this);
-}
+};
 
 VacaAbajo.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
@@ -169,7 +169,7 @@ VacaDisparo.prototype.actualizar = function() {
 		this.remover = true;
 	}
 	Entidad.prototype.actualizar.call(this);
-}
+};
 
 VacaDisparo.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);

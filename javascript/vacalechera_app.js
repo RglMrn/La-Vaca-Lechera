@@ -9,6 +9,7 @@ var ASSET_MANAGER = new AssetManager();
 var vacalechera;
 var vaca;
 var granjero;
+var pollo;
 
 var loaded = false;
 var iniciado = false;
@@ -25,6 +26,7 @@ ASSET_MANAGER.queueDownload("./imagenes/Sprites3-4.png","granjeroatrapando");
 ASSET_MANAGER.queueDownload("./imagenes/chorro_chico.png","chorro");
 ASSET_MANAGER.queueDownload("./imagenes/fondo.png","fondo");
 ASSET_MANAGER.queueDownload("./imagenes/chorro_derramado.png","chorroderramado");
+ASSET_MANAGER.queueDownload("./imagenes/pollo.png","pollo");
 
 ASSET_MANAGER.downloadAll(function() {
     estadoLoad.innerHTML = "Presiona cualquier tecla para continuar";
@@ -32,9 +34,11 @@ ASSET_MANAGER.downloadAll(function() {
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 780, 200);
     granjero = new Granjero(vacalechera, 200, 200);
+    pollo = new Pollo(vacalechera, 445, 135);
     
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(granjero);    
+    vacalechera.addEntidad(pollo);  
     loaded = true;
 });
 

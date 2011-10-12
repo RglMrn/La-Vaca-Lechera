@@ -10,4 +10,5 @@ require("chorro.js");
 require("sombra.js");
 require("granjero.js");
 require("vaca.js");
+require("pollo.js");
 require("juego.js");

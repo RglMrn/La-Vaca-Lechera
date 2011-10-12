@@ -8,6 +8,6 @@ require("clock.js");
 require("entidad.js");
 require("chorro.js");
 require("sombra.js");
-require("cubeta.js");
+require("granjero.js");
 require("vaca.js");
 require("juego.js");

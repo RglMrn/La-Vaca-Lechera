@@ -57,8 +57,8 @@ Chorro.prototype.dibujar = function(ctx) {
 
 Chorro.prototype.isCaught = function() {
   for (var i = 0; i < this.juego.entidades.length; i++) {
-    var cubeta = this.juego.entidades[i];
-    if (cubeta instanceof Cubeta && cubeta.atrapoChorro(this)) {
+    var granjero = this.juego.entidades[i];
+    if (granjero instanceof Granjero && granjero.atrapoChorro(this)) {
       return true;
     }
   }

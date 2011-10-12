@@ -2,7 +2,7 @@ var loaded = false;
 var iniciado = false;
 function presionoKey(evt) {
   if(iniciado) {
-    cubeta.moverCubeta(evt);
+    granjero.moverGranjero(evt);
   }
   else {
     if(loaded) {
@@ -21,7 +21,7 @@ function presionoKey(evt) {
 
 function clickeo (evt) {
 	if(iniciado) {
-	cubeta.moverCubeta2(evt);
+	granjero.moverGranjero2(evt);
 	}
 	else {
 		if(loaded) {
@@ -44,7 +44,7 @@ var ASSET_MANAGER = new AssetManager();
 
 var vacalechera;
 var vaca;
-var cubeta;
+var granjero;
 
 ASSET_MANAGER.queueDownload("./imagenes/vaca_normal.png","vacanormal");
 ASSET_MANAGER.queueDownload("./imagenes/vaca_disparo.png","vacadisparo");
@@ -59,10 +59,10 @@ ASSET_MANAGER.downloadAll(function() {
     document.getElementById("content").getElementsByTagName("div")[0].innerHTML = "Presiona cualquier tecla para continuar"
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 780, 200);
-    cubeta = new Cubeta(vacalechera, 200, 200);
+    granjero = new Granjero(vacalechera, 200, 200);
     window.addEventListener('keydown',presionoKey,true);
 	window.addEventListener('click',clickeo,true);
     vacalechera.addEntidad(vaca);
-    vacalechera.addEntidad(cubeta);    
+    vacalechera.addEntidad(granjero);    
     loaded = true;
 });

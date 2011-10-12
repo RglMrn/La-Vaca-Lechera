@@ -11,4 +11,6 @@ require("sombra.js");
 require("granjero.js");
 require("vaca.js");
 require("pollo.js");
+require("contador.js");
+require("cronometro.js");
 require("juego.js");

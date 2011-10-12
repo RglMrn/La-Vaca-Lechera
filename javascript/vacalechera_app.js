@@ -10,6 +10,8 @@ var vacalechera;
 var vaca;
 var granjero;
 var pollo;
+var contador;
+var cronometro;
 
 var loaded = false;
 var iniciado = false;
@@ -35,10 +37,14 @@ ASSET_MANAGER.downloadAll(function() {
     vaca = new Vaca(vacalechera, 780, 200);
     granjero = new Granjero(vacalechera, 200, 200);
     pollo = new Pollo(vacalechera, 485, 135);
+    contador = new Contador(vacalechera, 300, 30);
+    cronometro = new Cronometro(vacalechera, 50, 30);
     
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(granjero);    
     vacalechera.addEntidad(pollo);  
+    vacalechera.addEntidad(contador);  
+    vacalechera.addEntidad(cronometro);  
     loaded = true;
 });
 

@@ -52,6 +52,8 @@ Juego.prototype.dibujar = function() {
 };
 
 Juego.prototype.actualizar = function() {
+    this.clockTick = this.clock.tick();
+    
     //Se recorre dos veces para asegurarse de que entidades que deben 
     //ser removidas no lleguen a ser dibujadas.
     
@@ -74,24 +76,9 @@ Juego.prototype.getTiempoJuego = function() {
 	return this.clock.gameTime;
 };
 
-Juego.prototype.actualizarReloj = function() {
-    this.ctx.font = "7mm Arial";
-    this.ctx.fillStyle = "white";  
-    this.ctx.fillText("Reloj: " + this.getTiempoJuego() / 1000, 50, 30);
-};
-
-Juego.prototype.actualizarContador = function() {
-    this.ctx.font = "7mm Arial";
-    this.ctx.fillStyle = "blue"; 
-    this.ctx.fillText("Atrapados: " + this.atrapados + "  Fallados: " + this.fallados, 300, 30);
-};
-
 Juego.prototype.loop = function() { //loop del juego que llama a los actualizar y dibujar de las entidades
-    this.clockTick = this.clock.tick();
     this.actualizar();
     this.dibujar();
-    this.actualizarReloj();
-    this.actualizarContador();
 };
 
 Juego.prototype.perdiste = function() { //evalúa si el jugador perdió

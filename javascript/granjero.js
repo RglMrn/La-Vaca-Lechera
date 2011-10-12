@@ -5,6 +5,19 @@ function Granjero(juego, x, y) { //Entidad Granjero
 	this.largo = this.imagen.height;
 	this.dx = 0;
 	this.dy = 0;
+    
+    
+    this.angulo = 0; 
+    this.velocidad = 0.1;
+    this.velocidadX = 0;
+    this.velocidadY = 0;
+    this.xNegativa = false;
+    this.yNegativa = false;
+    this.destino = {'x':this.x, 'y':this.y};
+    this.elapsedTime = 0;
+    
+    this.limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":215 - this.largo/2, 
+        "abajo":450-this.largo/2};
   //Radio de captura de la cubeta
     this.offsetCubetaX = 30;
     this.offsetCubetaY = -25;
@@ -15,7 +28,7 @@ Granjero.prototype = new Entidad();
 Granjero.prototype.constructor = Granjero;
 
 Granjero.prototype.onKeyDown = function(evt) {//Evento que sera llamado cuando se presione una tecla
-    switch (evt.keyCode) {
+    /*switch (evt.keyCode) {
         case 38 :   //Se presionó up arrow
         case 87 :   //Se presionó w            
             this.dx = 0;
@@ -36,34 +49,73 @@ Granjero.prototype.onKeyDown = function(evt) {//Evento que sera llamado cuando s
             this.dx = 20;
             this.dy = 0;    
         break;
-    }
+    }*/
 };
 
 Granjero.prototype.onClick = function(evt) {
-    this.x = evt.layerX;
-    this.y = evt.layerY - this.largo/2; //Para que se dibujen los pies en ese punto
+    this.destino.x = evt.layerX;
+    this.destino.y = evt.layerY - this.largo/2;
+    
+    if (this.destino.x < this.x) {
+        this.xNegativa = true;
+    }
+    else {
+        this.xNegativa = false;
+    }
+    
+    if (this.destino.y < this.y) {
+        this.yNegativa = true;
+    }
+    else {
+        this.yNegativa = false;
+    }
+    
 }
 
 Granjero.prototype.actualizar = function() {
-    limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":215 - this.largo/2, 
-        "abajo":450-this.largo/2}
-	
-	this.x += this.dx;
-	this.y += this.dy;
-	this.dx = this.dy = 0;
-  
-    if(this.x < limites.izq) {
-        this.x = limites.izq;
+    var deltaY = this.destino.y - this.y;
+    var deltaX = this.destino.x - this.x;
+    
+    this.angulo = Math.abs(Math.atan(deltaY / deltaX));
+    this.velocidadX = this.velocidad * Math.cos(this.angulo);
+    this.velocidadY = this.velocidad * Math.sin(this.angulo);
+    
+    if (this.xNegativa) {
+        this.velocidadX = -this.velocidadX;
     }
-    else if(this.x > limites.der) {
-        this.x = limites.der;
+    
+    if (this.yNegativa) {
+        this.velocidadY = -this.velocidadY;
     }
-    if(this.y < limites.arriba) {
-        this.y = limites.arriba;
+    
+	if (this.destino.x -1 <= this.x && this.x <= this.destino.x + 1) {
+        this.velocidadX = 0;
+        this.x = this.destino.x;
     }
-    else if(this.y > limites.abajo) {
-        this.y = limites.abajo;
+    
+    if (this.destino.y -1 <= this.y && this.y <= this.destino.y + 1) {
+        this.y = this.destino.y;
+        this.velocidadY = 0;
     }
+
+    this.x = this.x + this.velocidadX * this.juego.clockTick;
+    this.y = this.y + this.velocidadY * this.juego.clockTick;
+    
+    //Revisa que no se pase de los límites
+    if(this.x < this.limites.izq) {
+        this.x = this.limites.izq;
+    }
+    else if(this.x > this.limites.der) {
+        this.x = this.limites.der;
+    }
+    
+    if(this.y < this.limites.arriba) {
+        this.y = this.limites.arriba;
+    }
+    else if(this.y > this.limites.abajo) {
+        this.y = this.limites.abajo;
+    }
+    
 	Entidad.prototype.actualizar.call(this);
 };
 

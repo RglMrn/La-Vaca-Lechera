@@ -16,55 +16,54 @@ Granjero.prototype.constructor = Granjero;
 
 Granjero.prototype.onKeyDown = function(evt) {//Evento que sera llamado cuando se presione una tecla
     switch (evt.keyCode) {
-        case 38 :  /* Up arrow was pressed o se presiono w */
-        case 87 :            
+        case 38 :   //Se presionó up arrow
+        case 87 :   //Se presionó w            
             this.dx = 0;
             this.dy = -20;
         break;
-        case 40:  /* Down arrow was pressed */
-        case 83:    
+        case 40:    //Se presionó down arrow
+        case 83:    //Se presionó s
             this.dx = 0;
             this.dy = 20;
         break;
-        case 37:  /* Left arrow was pressed */
-        case 65:    
+        case 37:    //Se presionó left arrow
+        case 65:    //Se presionó a
             this.dx = -20;
             this.dy = 0;
         break;
-        case 39:  /* Right arrow was pressed */
-        case 68:    
+        case 39:    //Se presionó right arrow
+        case 68:    //Se presionó d
             this.dx = 20;
-            this.dy = 0;
+            this.dy = 0;    
         break;
     }
 };
 
 Granjero.prototype.onClick = function(evt) {
-	this.x = evt.layerX;
-	this.y = evt.layerY;
-	
+    this.x = evt.layerX;
+    this.y = evt.layerY - this.largo/2; //Para que se dibujen los pies en ese punto
 }
 
 Granjero.prototype.actualizar = function() {
-  limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":215 - this.largo/2, 
-    "abajo":450-this.largo/2}
+    limites = { "izq":this.ancho/2, "der":600-this.ancho/2, "arriba":215 - this.largo/2, 
+        "abajo":450-this.largo/2}
 	
 	this.x += this.dx;
 	this.y += this.dy;
 	this.dx = this.dy = 0;
   
-  if(this.x < limites.izq) {
-    this.x = limites.izq;
-  }
-  else if(this.x > limites.der) {
-    this.x = limites.der;
-  }
-  if(this.y < limites.arriba) {
-    this.y = limites.arriba;
-  }
-  else if(this.y > limites.abajo) {
-    this.y = limites.abajo;
-  }
+    if(this.x < limites.izq) {
+        this.x = limites.izq;
+    }
+    else if(this.x > limites.der) {
+        this.x = limites.der;
+    }
+    if(this.y < limites.arriba) {
+        this.y = limites.arriba;
+    }
+    else if(this.y > limites.abajo) {
+        this.y = limites.abajo;
+    }
 	Entidad.prototype.actualizar.call(this);
 };
 
@@ -89,11 +88,11 @@ Granjero.prototype.atrapoChorro = function(chorro) {
     var cubetaY = this.y + this.offsetCubetaY;
     
     if( Math.abs(cubetaX - chorro.x) < this.radioCubeta &&
-      Math.abs(cubetaY - chorro.y) < this.radioCubeta) {
-      return true;  
+        Math.abs(cubetaY - chorro.y) < this.radioCubeta) {
+        return true;  
     }
     else {
-      return false;
+        return false;
     }
 }
 

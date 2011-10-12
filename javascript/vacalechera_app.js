@@ -16,7 +16,7 @@ function iniciarJuego() {
 
 function onKeyDown(evt) {
     if(iniciado) {
-        granjero.moverGranjero(evt);
+        granjero.onKeyDown(evt);
     }
     else if (loaded) {
         iniciarJuego();
@@ -25,7 +25,7 @@ function onKeyDown(evt) {
 
 function onClick (evt) {
 	if(iniciado) {
-        granjero.moverGranjero2(evt);
+        granjero.onClick(evt);
 	}
 	else if (loaded) {
         iniciarJuego();

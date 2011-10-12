@@ -6,15 +6,15 @@ function Granjero(juego, x, y) { //Entidad Granjero
 	this.dx = 0;
 	this.dy = 0;
   //Radio de captura de la cubeta
-  this.offsetCubetaX = 30;
-  this.offsetCubetaY = -25;
-  this.radioCubeta = this.imagen.height/4;
+    this.offsetCubetaX = 30;
+    this.offsetCubetaY = -25;
+    this.radioCubeta = this.imagen.height/4;
 }
 
 Granjero.prototype = new Entidad();
 Granjero.prototype.constructor = Granjero;
 
-Granjero.prototype.moverGranjero = function(evt) {//Evento que sera llamado cuando se presione una tecla
+Granjero.prototype.onKeyDown = function(evt) {//Evento que sera llamado cuando se presione una tecla
     switch (evt.keyCode) {
         case 38 :  /* Up arrow was pressed o se presiono w */
         case 87 :            
@@ -39,7 +39,7 @@ Granjero.prototype.moverGranjero = function(evt) {//Evento que sera llamado cuan
     }
 };
 
-Granjero.prototype.moverGranjero2 = function(evt) {
+Granjero.prototype.onClick = function(evt) {
 	this.x = evt.layerX;
 	this.y = evt.layerY;
 	

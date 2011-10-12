@@ -17,7 +17,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.imagen = ASSET_MANAGER.getAsset('chorro');
     this.radius = this.imagen.height/2;
     var espera = 100;
-    this.animation = new Animation(this.imagen, 67, espera, true);
+    this.animation = new Animation(this.imagen, 1, espera, true);
 }
 
 Chorro.prototype = new Entidad();
@@ -80,7 +80,7 @@ function ChorroDerramado(juego, x, y) {
     Entidad.call(this, juego, x, y);
     this.imagen = ASSET_MANAGER.getAsset("chorroderramado");
     var espera = 100;
-    this.animation = new Animation(this.imagen, 107.25, espera, false);
+    this.animation = new Animation(this.imagen, 4, espera, false);
 }
 
 ChorroDerramado.prototype = new Entidad();

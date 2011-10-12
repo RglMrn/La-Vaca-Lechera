@@ -1,6 +1,6 @@
-function Animation(spriteSheet, frameWidth, frameDuration, loop) {
+function Animation(spriteSheet, cantidadFrames, frameDuration, loop) {
     this.spriteSheet = spriteSheet;
-    this.frameWidth = frameWidth;
+    this.frameWidth = this.spriteSheet.width / cantidadFrames;
     this.frameDuration = frameDuration;
     this.frameHeight= this.spriteSheet.height;
     this.totalTime = (this.spriteSheet.width / this.frameWidth) * this.frameDuration;

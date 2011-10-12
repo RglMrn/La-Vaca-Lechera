@@ -116,7 +116,10 @@ Granjero.prototype.actualizar = function() {
     this.y = this.y + this.velocidadY * this.juego.clockTick;
     
     if (!this.movimientoX && !this.movimientoY) {
-        this.animacion = this.animParado;
+        if(this.animacion.willBeDone(this.juego.clock.maxStep)){
+            this.animacion = this.animParado;
+        }
+        
     }
     
     //Revisa que no se pase de los límites
@@ -161,7 +164,6 @@ Granjero.prototype.atrapoChorro = function(chorro) {
         return true;  
     }
     else {
-        this.animacion = this.animMovimiento;
         return false;
     }
 }

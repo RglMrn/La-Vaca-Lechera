@@ -34,7 +34,7 @@ ASSET_MANAGER.downloadAll(function() {
     vacalechera = new Juego(ctx);
     vaca = new Vaca(vacalechera, 780, 200);
     granjero = new Granjero(vacalechera, 200, 200);
-    pollo = new Pollo(vacalechera, 445, 135);
+    pollo = new Pollo(vacalechera, 485, 135);
     
     vacalechera.addEntidad(vaca);
     vacalechera.addEntidad(granjero);    

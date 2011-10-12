@@ -1,8 +1,13 @@
 function Granjero(juego, x, y) { //Entidad Granjero
 	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
-	this.imagen = ASSET_MANAGER.getAsset('cubetaarriba');
-	this.ancho = this.imagen.width;
-	this.largo = this.imagen.height;
+    this.animParado =  new Animation(ASSET_MANAGER.getAsset('cubetaarriba'), 1, 100, true);
+    this.animMovimiento = new Animation(ASSET_MANAGER.getAsset('granjeroquieto'), 1, 100, true);
+    this.animAtrapando = new Animation (ASSET_MANAGER.getAsset('granjeroatrapando'), 2, 350, true);
+    
+	this.animacion = this.animParado;
+	
+    this.ancho = this.animParado.frameWidth;
+	this.largo = this.animParado.frameHeight;
 	this.dx = 0;
 	this.dy = 0;
     
@@ -13,6 +18,8 @@ function Granjero(juego, x, y) { //Entidad Granjero
     this.velocidadY = 0;
     this.xNegativa = false;
     this.yNegativa = false;
+    this.movimientoX = false;
+    this.movimientoY = false;
     this.destino = {'x':this.x, 'y':this.y};
     this.elapsedTime = 0;
     
@@ -21,7 +28,7 @@ function Granjero(juego, x, y) { //Entidad Granjero
   //Radio de captura de la cubeta
     this.offsetCubetaX = 30;
     this.offsetCubetaY = -25;
-    this.radioCubeta = this.imagen.height/4;
+    this.radioCubeta = this.largo/4;
 }
 
 Granjero.prototype = new Entidad();
@@ -55,6 +62,11 @@ Granjero.prototype.onKeyDown = function(evt) {//Evento que sera llamado cuando s
 Granjero.prototype.onClick = function(evt) {
     this.destino.x = evt.layerX;
     this.destino.y = evt.layerY - this.largo/2;
+    
+    this.movimientoX = true;
+    this.movimientoY = true;
+    
+    this.animacion = this.animMovimiento;
     
     if (this.destino.x < this.x) {
         this.xNegativa = true;
@@ -91,15 +103,22 @@ Granjero.prototype.actualizar = function() {
 	if (this.destino.x -1 <= this.x && this.x <= this.destino.x + 1) {
         this.velocidadX = 0;
         this.x = this.destino.x;
+        this.movimientoX = false;
     }
     
     if (this.destino.y -1 <= this.y && this.y <= this.destino.y + 1) {
         this.y = this.destino.y;
         this.velocidadY = 0;
+        this.movimientoY = false;
     }
-
+    
+    
     this.x = this.x + this.velocidadX * this.juego.clockTick;
     this.y = this.y + this.velocidadY * this.juego.clockTick;
+    
+    if (!this.movimientoX && !this.movimientoY) {
+        this.animacion = this.animParado;
+    }
     
     //Revisa que no se pase de los límites
     if(this.x < this.limites.izq) {
@@ -120,9 +139,9 @@ Granjero.prototype.actualizar = function() {
 };
 
 Granjero.prototype.dibujar = function(ctx) {//Logica de dibujar del Granjero
-    var x = this.x - this.imagen.width/2;
-    var y = this.y - this.imagen.height/2;
-    ctx.drawImage(this.imagen, x, y);
+    //var x = this.x - this.imagen.width/2;
+    //var y = this.y - this.imagen.height/2;
+    this.animacion.drawFrame(this.juego.clockTick, ctx,  this.x, this.y);
 
     //Dibujar circulo de guia
     /*ctx.beginPath();
@@ -135,15 +154,17 @@ Granjero.prototype.dibujar = function(ctx) {//Logica de dibujar del Granjero
 
 
 Granjero.prototype.atrapoChorro = function(chorro) {
-    //Posicion de la cubeta
+    //Posición de la cubeta
     var cubetaX = this.x + this.offsetCubetaX;
     var cubetaY = this.y + this.offsetCubetaY;
     
     if( Math.abs(cubetaX - chorro.x) < this.radioCubeta &&
         Math.abs(cubetaY - chorro.y) < this.radioCubeta) {
+        this.animacion = this.animAtrapando;
         return true;  
     }
     else {
+        this.animacion = this.animMovimiento;
         return false;
     }
 }

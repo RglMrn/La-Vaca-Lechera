@@ -23,9 +23,13 @@ function Juego(ctx) { //El controlador principal del juego
 	
     this.clock = new Clock();
     this.clockTick;
+    
+    //Muestra stats de rendimiento
+    this.stats = new Stats();
 }
 
 Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
+    document.body.appendChild(this.stats.domElement);
     var that = this;
     (function gameLoop() {
         if (that.fallados > 9) { //evalúa si el jugador perdió
@@ -79,6 +83,8 @@ Juego.prototype.getTiempoJuego = function() {
 Juego.prototype.loop = function() { //loop del juego que llama a los actualizar y dibujar de las entidades
     this.actualizar();
     this.dibujar();
+    this.stats.update();
+    this.actualizarPintadas();
 };
 
 Juego.prototype.perdiste = function() { //evalúa si el jugador perdió
@@ -87,4 +93,11 @@ Juego.prototype.perdiste = function() { //evalúa si el jugador perdió
     this.ctx.fillStyle = "red"; 
     this.ctx.fillText("Perdiste" ,275, 225);
 };    
+
+Juego.prototype.actualizarPintadas = function() { //Indica la cantidad de veces que se ha pintado sobre el window
+    this.ctx.font = "5mm Arial";
+    this.ctx.fillStyle = "black"; 
+    this.ctx.fillText(window.mozPaintCount ,750, 25);
+    
+}
     

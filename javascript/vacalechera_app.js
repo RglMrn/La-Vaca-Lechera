@@ -46,6 +46,7 @@ ASSET_MANAGER.downloadAll(function() {
     vacalechera.addEntidad(contador);  
     vacalechera.addEntidad(cronometro);  
     loaded = true;
+    
 });
 
 function iniciarJuego() {
@@ -75,3 +76,4 @@ function onClick (evt) {
         iniciarJuego();
   }
 }
+

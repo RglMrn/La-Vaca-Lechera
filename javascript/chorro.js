@@ -80,6 +80,7 @@ Chorro.prototype.rotarAndDibujar = function(ctx) {
 function ChorroDerramado(juego, x, y) {
     Entidad.call(this, juego, x, y);
     this.imagen = ASSET_MANAGER.getAsset("chorroderramado");
+    this.z=0;
     var espera = 100;
     this.animation = new Animation(this.imagen, 4, espera, false);
 }

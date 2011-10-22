@@ -116,6 +116,7 @@ Granjero.prototype.actualizar = function() {
     
     this.x = this.x + this.velocidadX * this.juego.clockTick;
     this.y = this.y + this.velocidadY * this.juego.clockTick;
+    this.z = this.y;
     
     if (!this.movimientoX && !this.movimientoY) {
         if(this.animacion.willBeDone(this.juego.clock.maxStep)){
@@ -134,9 +135,11 @@ Granjero.prototype.actualizar = function() {
     
     if(this.y < this.limites.arriba) {
         this.y = this.limites.arriba;
+        this.z=this.y;
     }
     else if(this.y > this.limites.abajo) {
         this.y = this.limites.abajo;
+        this.z=this.y;
     }
     
 	Entidad.prototype.actualizar.call(this);

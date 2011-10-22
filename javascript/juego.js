@@ -10,7 +10,9 @@ window.requestAnimFrame = (function(){
             window.setTimeout(callback, 1000 / 60);
           };
 })();
-
+function sortAscending(a,b){//Ordena ascendentemente usando y como z index
+	return a.z-b.z;
+	}
 function Juego(ctx) { //El controlador principal del juego
     this.entidades = [];
     this.ctx = ctx;
@@ -44,6 +46,7 @@ Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
 
 Juego.prototype.addEntidad = function(entidad) {
     this.entidades.unshift(entidad);
+    this.entidades.sort(sortAscending);
 };
 
 Juego.prototype.dibujar = function() {
@@ -65,6 +68,7 @@ Juego.prototype.actualizar = function() {
         
         if (!this.entidades[i].remover) {
             this.entidades[i].actualizar();
+        this.entidades.sort(sortAscending);    
         }
     }
     
@@ -72,6 +76,7 @@ Juego.prototype.actualizar = function() {
         
         if (this.entidades[i].remover) {
             this.entidades.splice(i, 1);
+            this.entidades.sort(sortAscending);
         }
     }
 };

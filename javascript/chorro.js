@@ -1,6 +1,7 @@
 function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.xInicial = xInicial;
     this.yInicial = yInicial;
+    this.z=yInicial;
     this.angulo = 0;
     this.tiempoTotal = tiempoTotal;
     this.xFinal = xFinal;

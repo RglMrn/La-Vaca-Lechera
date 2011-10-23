@@ -1,7 +1,8 @@
-function Entidad(juego, x, y ) { //Define los atributos bases de toda entidad
+function Entidad(juego, x, y) { //Define los atributos bases de toda entidad
 	this.juego = juego;
 	this.x = x;
 	this.y = y;
+	this.z=y;
 	this.remover = false;
 }
 

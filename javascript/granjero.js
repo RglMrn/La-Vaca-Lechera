@@ -67,6 +67,7 @@ Granjero.prototype.onClick = function(evt) {
     
     this.animacion = this.animMovimiento;
     
+    //verificacion de destino x negativa o y negativa
     if (this.destino.x < this.x) {
         this.xNegativa = true;
     }
@@ -109,11 +110,13 @@ Granjero.prototype.actualizar = function() {
         this.y = this.destino.y;
         this.velocidadY = 0;
         this.movimientoY = false;
+        this.z=this.y;
     }
     
     
     this.x = this.x + this.velocidadX * this.juego.clockTick;
     this.y = this.y + this.velocidadY * this.juego.clockTick;
+    this.z = this.y;
     
     if (!this.movimientoX && !this.movimientoY) {
         if(this.animacion.willBeDone(this.juego.clock.maxStep)){
@@ -132,9 +135,11 @@ Granjero.prototype.actualizar = function() {
     
     if(this.y < this.limites.arriba) {
         this.y = this.limites.arriba;
+        this.z=this.y;
     }
     else if(this.y > this.limites.abajo) {
         this.y = this.limites.abajo;
+        this.z=this.y;
     }
     
 	Entidad.prototype.actualizar.call(this);

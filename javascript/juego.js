@@ -76,7 +76,6 @@ Juego.prototype.actualizar = function() {
         
         if (this.entidades[i].remover) {
             this.entidades.splice(i, 1);
-            this.entidades.sort(sortAscending);
         }
     }
 };

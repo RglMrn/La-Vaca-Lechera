@@ -4,6 +4,7 @@ function Sombra(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.tiempoTotal = tiempoTotal;
     this.xFinal = xFinal;
     this.distanciaChorro = 0;
+    this.z=yInicial;
 
     this.gravedad = 1/10000;
     this.elapsedTime = 0;

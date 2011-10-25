@@ -1,15 +1,22 @@
 function Pollo(juego, x, y) { //Entidad Pollo de Zealotscout
+   //Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y); 
+    
 	this.animacion = new Animation(ASSET_MANAGER.getAsset('pollo'), 21, 100, true);
-    Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
+    
 }
 
 Pollo.prototype = new Entidad();
 Pollo.prototype.constructor = Pollo;
 
 Pollo.prototype.actualizar = function() {
-    
+    //Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 Pollo.prototype.dibujar = function(ctx) {
     this.animacion.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };

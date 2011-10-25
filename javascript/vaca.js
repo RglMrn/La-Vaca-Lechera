@@ -1,6 +1,8 @@
 function Vaca(juego, x, y) {
+    //Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y);
+    
 	this.imagen = ASSET_MANAGER.getAsset('vacanormal');
-	Entidad.call(this, juego, x, y);
 	var espera = 880; //Tiempo antes de siguiente acción
 	this.animation = new Animation(this.imagen, 1, espera, false);
 }
@@ -42,11 +44,16 @@ Vaca.prototype.actualizar = function() {
 			}
 		}
 	}
-	Entidad.prototype.actualizar.call(this);
+    
+	//Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 Vaca.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };
 
 Vaca.prototype.elegirDisparo = function() {
@@ -79,13 +86,17 @@ Vaca.prototype.elegirDisparo = function() {
 	}
 };
 
-function VacaArriba(juego, x, y, yFinal,disparo ) {
-	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
+//CLASE VACA ARRIBA
+
+function VacaArriba(juego, x, y, yFinal, disparo ) {
+	//Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y);
+    
+    this.imagen = ASSET_MANAGER.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 2, 100, true);
 	this.disparo = disparo;
 	this.yFinal = yFinal;
-	Entidad.call(this, juego, x, y);
 }
 
 VacaArriba.prototype = new Entidad();
@@ -105,20 +116,30 @@ VacaArriba.prototype.actualizar = function() {
 	else {
 		this.y -= this.speed * this.juego.clockTick;
 	}
-	Entidad.prototype.actualizar.call(this);
+    
+	//Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 VacaArriba.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };
 
+//CLASE VACA ABAJO
+
 function VacaAbajo(juego, x, y,yFinal ,disparo) {
+    //Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y);
+    
 	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 2, 100, true);
 	this.disparo = disparo;
 	this.yFinal = yFinal;
-	Entidad.call(this, juego, x, y);
+	
 }
 
 VacaAbajo.prototype = new Entidad();
@@ -138,18 +159,28 @@ VacaAbajo.prototype.actualizar = function() {
 	else {
 		this.y += this.speed * this.juego.clockTick;
 	}
-	Entidad.prototype.actualizar.call(this);
+    
+	//Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 VacaAbajo.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };
 
+//CLASE VACA DISPARO
+
 function VacaDisparo(juego, x, y, disparo) {
+    //Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y);
+    
 	this.imagen = ASSET_MANAGER.getAsset('vacadisparo');
 	this.animation = new Animation(this.imagen, 11, 100, false);
 	this.disparo = disparo;
-	Entidad.call(this, juego, x, y);
+
 }
 
 VacaDisparo.prototype = new Entidad();
@@ -168,9 +199,14 @@ VacaDisparo.prototype.actualizar = function() {
     this.juego.lanzados++;
 		this.remover = true;
 	}
-	Entidad.prototype.actualizar.call(this);
+    
+	//Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 VacaDisparo.prototype.dibujar = function(ctx) {
 	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };

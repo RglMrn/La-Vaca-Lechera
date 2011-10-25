@@ -1,4 +1,7 @@
 function Sombra(juego, xInicial, yInicial, tiempoTotal, xFinal) {
+    //Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, xInicial, yInicial); 
+    
     this.xInicial = xInicial;
     this.yInicial = yInicial;
     this.tiempoTotal = tiempoTotal;
@@ -13,7 +16,7 @@ function Sombra(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     this.velocidadX = deltaX / tiempoTotal;
     this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
 
-    Entidad.call(this, juego, this.xInicial, this.yInicial);
+    
 }
 
 Sombra.prototype = new Entidad();
@@ -33,6 +36,7 @@ Sombra.prototype.actualizar = function() {
         this.remover = true;
     }
     
+    //Llama a la función actualizar de la clase Entidad
     Entidad.prototype.actualizar.call(this);
 }
 
@@ -63,4 +67,7 @@ Sombra.prototype.dibujar = function(ctx) {
     
     //Volver al estado guardado del canvas
     ctx.restore();
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };

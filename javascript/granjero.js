@@ -1,5 +1,7 @@
 function Granjero(juego, x, y) { //Entidad Granjero
-	Entidad.call(this, juego, x, y); //Obteniendo los atributos de Entidad
+	//Obteniendo los atributos de la clase Entidad
+    Entidad.call(this, juego, x, y); 
+    
     this.animParado =  new Animation(ASSET_MANAGER.getAsset('cubetaarriba'), 1, 100, false);
     this.animMovimiento = new Animation(ASSET_MANAGER.getAsset('granjeroquieto'), 1, 100, false);
     
@@ -142,7 +144,8 @@ Granjero.prototype.actualizar = function() {
         this.z=this.y;
     }
     
-	Entidad.prototype.actualizar.call(this);
+	//Llama a la función actualizar de la clase Entidad
+    Entidad.prototype.actualizar.call(this);
 };
 
 Granjero.prototype.dibujar = function(ctx) {//Logica de dibujar del Granjero
@@ -155,6 +158,9 @@ Granjero.prototype.dibujar = function(ctx) {//Logica de dibujar del Granjero
         this.radioCubeta, 0, Math.PI*2, false);
     ctx.stroke();
     ctx.closePath();*/
+    
+    //Llama a la función dibujar de la clase Entidad
+	Entidad.prototype.dibujar.call(this, ctx);
 };
 
 

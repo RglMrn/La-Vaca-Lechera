@@ -1,5 +1,7 @@
 //Shim que se encarga de solicitar el animationFrame del browser que estemos utilizando
 //para optimizar la animacion del juego
+var perder = document.getElementById("perdidos");
+var reintentar = document.getElementById("reintentar");
 window.requestAnimFrame = (function(){
     return  window.requestAnimationFrame     ||
           window.webkitRequestAnimationFrame ||
@@ -11,7 +13,7 @@ window.requestAnimFrame = (function(){
           };
 })();
 
-function Juego(ctx) { //El controlador principal del juego
+function Juego(ctx,callback) { //El controlador principal del juego
     this.entidades = [];
     this.ctx = ctx;
     this.ancho = ctx.canvas.width;
@@ -23,7 +25,8 @@ function Juego(ctx) { //El controlador principal del juego
 	
     this.clock = new Clock();
     this.clockTick;
-    
+    this.randoom=callback;
+	this.randoom();
     //Muestra stats de rendimiento
     this.stats = new Stats();
 }
@@ -33,12 +36,13 @@ Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
     var that = this;
     (function gameLoop() {
         if (that.fallados > 9) { //evalúa si el jugador perdió
-            that.perdiste();
+            that.perder();
         }
         else {
              that.loop();
+			 requestAnimFrame(gameLoop, that.ctx.canvas);
         }
-        requestAnimFrame(gameLoop, that.ctx.canvas);
+        
     })();
 };
 
@@ -87,13 +91,18 @@ Juego.prototype.loop = function() { //loop del juego que llama a los actualizar 
     this.actualizarPintadas();
 };
 
-Juego.prototype.perdiste = function() { //evalúa si el jugador perdió
-
-    this.ctx.font = "20mm Arial";
-    this.ctx.fillStyle = "red"; 
-    this.ctx.fillText("Perdiste" ,275, 225);
-};    
-
+Juego.prototype.perder = function() { //evalúa si el jugador perdió
+	var that = this
+	perder.style.display = "block";
+	reintentar.addEventListener('click',perdiste,false);
+	
+};
+function perdiste(evt){
+	perder.style.display = "none";
+	vacalechera = new Juego(vacalechera.ctx,vacalechera.randoom);
+	vacalechera.iniciar();
+	
+};
 Juego.prototype.actualizarPintadas = function() { //Indica la cantidad de veces que se ha pintado sobre el window
     this.ctx.font = "5mm Arial";
     this.ctx.fillStyle = "black"; 

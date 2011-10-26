@@ -33,18 +33,19 @@ ASSET_MANAGER.queueDownload("./imagenes/pollo.png","pollo");
 ASSET_MANAGER.downloadAll(function() {
     estadoLoad.innerHTML = "Presiona cualquier tecla para continuar";
     
-    vacalechera = new Juego(ctx);
-    vaca = new Vaca(vacalechera, 780, 200);
-    granjero = new Granjero(vacalechera, 200, 200);
-    pollo = new Pollo(vacalechera, 485, 135);
-    contador = new Contador(vacalechera, 300, 30);
-    cronometro = new Cronometro(vacalechera, 50, 30);
+    vacalechera = new Juego(ctx,function(){
+	vaca = new Vaca(this, 780, 200);
+    granjero = new Granjero(this, 200, 200);
+    pollo = new Pollo(this, 485, 135);
+    contador = new Contador(this, 300, 30);
+    cronometro = new Cronometro(this, 50, 30);
     
-    vacalechera.addEntidad(vaca);
-    vacalechera.addEntidad(granjero);    
-    vacalechera.addEntidad(pollo);  
-    vacalechera.addEntidad(contador);  
-    vacalechera.addEntidad(cronometro);  
+    this.addEntidad(vaca);
+    this.addEntidad(granjero);    
+    this.addEntidad(pollo);  
+    this.addEntidad(contador);  
+    this.addEntidad(cronometro);  
+	});
     loaded = true;
     
 });
@@ -76,4 +77,5 @@ function onClick (evt) {
         iniciarJuego();
   }
 }
+
 

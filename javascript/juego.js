@@ -1,7 +1,5 @@
 //Shim que se encarga de solicitar el animationFrame del browser que estemos utilizando
 //para optimizar la animacion del juego
-var perder = document.getElementById("perdidos");
-var reintentar = document.getElementById("reintentar");
 window.requestAnimFrame = (function(){
     return  window.requestAnimationFrame     ||
           window.webkitRequestAnimationFrame ||
@@ -17,7 +15,7 @@ function sortAscending(a,b){//Ordena ascendentemente usando y como z index
 	return a.z-b.z;
 	}
 
-function Juego(ctx,callback) { //El controlador principal del juego
+function Juego(ctx,callback,callback2) { //El controlador principal del juego
     this.entidades = [];
     this.ctx = ctx;
     this.ancho = ctx.canvas.width;
@@ -31,11 +29,15 @@ function Juego(ctx,callback) { //El controlador principal del juego
     this.clockTick;
     this.randoom=callback;
 	this.randoom();
+	this.perder = callback2;
     //Muestra stats de rendimiento
     this.stats = new Stats();
 }
 
 Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
+	stats = document.getElementById("stats");
+	if(stats)
+		document.body.removeChild(stats);
     document.body.appendChild(this.stats.domElement);
     var that = this;
     (function gameLoop() {
@@ -74,10 +76,10 @@ Juego.prototype.actualizar = function() {
         
         if (!this.entidades[i].remover) {
             this.entidades[i].actualizar();
-        this.entidades.sort(sortAscending);    
+            
         }
     }
-    
+    this.entidades.sort(sortAscending);
     for (var i = this.entidades.length-1; i >= 0; --i) {
         
         if (this.entidades[i].remover) {
@@ -97,18 +99,6 @@ Juego.prototype.loop = function() { //loop del juego que llama a los actualizar 
     this.actualizarPintadas();
 };
 
-Juego.prototype.perder = function() { //evalúa si el jugador perdió
-	var that = this
-	perder.style.display = "block";
-	reintentar.addEventListener('click',perdiste,false);
-	
-};
-function perdiste(evt){
-	perder.style.display = "none";
-	vacalechera = new Juego(vacalechera.ctx,vacalechera.randoom);
-	vacalechera.iniciar();
-	
-};
 Juego.prototype.actualizarPintadas = function() { //Indica la cantidad de veces que se ha pintado sobre el window
     this.ctx.font = "5mm Arial";
     this.ctx.fillStyle = "black"; 

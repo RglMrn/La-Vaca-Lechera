@@ -41,6 +41,7 @@ var Stats = function () {
 	};
 
 	_container = document.createElement( 'div' );
+	_container.id = "stats";
 	_container.style.cursor = 'pointer';
 	_container.style.width = '80px';
 	_container.style.opacity = '0.9';

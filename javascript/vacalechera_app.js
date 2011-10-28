@@ -1,9 +1,9 @@
 var canvas = document.getElementById('canvas0');
-var estadoLoad = document.getElementById("estadoLoad");
+var lbl_loading = document.getElementById("lbl_loading");
 var portada = document.getElementById("portada");
 var contenedor = document.getElementById("content");
-var perder = document.getElementById("perdidos");
-var reintentar = document.getElementById("reintentar");
+var fondo_perdiste = document.getElementById("fondo_perdiste");
+var btn_reintentar = document.getElementById("btn_reintentar");
 
 var ctx = canvas.getContext('2d');
 var ASSET_MANAGER = new AssetManager();
@@ -33,7 +33,7 @@ ASSET_MANAGER.queueDownload("./imagenes/chorro_derramado.png","chorroderramado")
 ASSET_MANAGER.queueDownload("./imagenes/pollo.png","pollo");
 
 ASSET_MANAGER.downloadAll(function() {
-    estadoLoad.innerHTML = "Presiona cualquier tecla para continuar";
+    lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
     
     vacalechera = new Juego(ctx,function(){
 	vaca = new Vaca(this, 780, 200);
@@ -49,8 +49,8 @@ ASSET_MANAGER.downloadAll(function() {
     this.addEntidad(cronometro); 
 	},function() { //evalúa si el jugador perdió
 		var that = this
-		perder.style.display = "block";
-		reintentar.addEventListener('click',perdiste,false);
+		fondo_perdiste.style.display = "block";
+		btn_reintentar.addEventListener('click',perdiste,false);
 		
 	});
     loaded = true;
@@ -62,7 +62,7 @@ function iniciarJuego() {
     canvas.style.background = 'url(./imagenes/fondo.png)';
     
     contenedor.removeChild(portada); 
-    contenedor.removeChild(estadoLoad);
+    contenedor.removeChild(lbl_loading);
     vacalechera.iniciar();
     iniciado = true;
 }
@@ -86,7 +86,7 @@ function onClick (evt) {
 }
 
 function perdiste(evt){
-	perder.style.display = "none";
+	fondo_perdiste.style.display = "none";
 	vacalechera = new Juego(vacalechera.ctx,vacalechera.randoom,vacalechera.perder);
 	vacalechera.iniciar();
 };

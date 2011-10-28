@@ -40,8 +40,9 @@ Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
 		document.body.removeChild(stats);
     document.body.appendChild(this.stats.domElement);
     var that = this;
-    (function gameLoop() {
-        if (that.fallados > 9) { //evalúa si el jugador perdió
+    (function gameLoop() {   
+        //evalúa si el jugador perdió
+        if (that.fallados > 0) { 
             that.perder();
         }
         else {

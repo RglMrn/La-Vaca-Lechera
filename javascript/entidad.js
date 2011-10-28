@@ -4,6 +4,7 @@ function Entidad(juego, x, y) { //Define los atributos bases de toda entidad
 	this.y = y;
 	this.z=y;
 	this.remover = false;
+	//juego.addEntidad(this);
 }
 
 Entidad.prototype.actualizar = function() { //La logica basica de actualizacion de las entidades

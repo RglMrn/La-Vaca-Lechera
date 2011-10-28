@@ -2,6 +2,8 @@ var canvas = document.getElementById('canvas0');
 var estadoLoad = document.getElementById("estadoLoad");
 var portada = document.getElementById("portada");
 var contenedor = document.getElementById("content");
+var perder = document.getElementById("perdidos");
+var reintentar = document.getElementById("reintentar");
 
 var ctx = canvas.getContext('2d');
 var ASSET_MANAGER = new AssetManager();
@@ -44,7 +46,12 @@ ASSET_MANAGER.downloadAll(function() {
     this.addEntidad(granjero);    
     this.addEntidad(pollo);  
     this.addEntidad(contador);  
-    this.addEntidad(cronometro);  
+    this.addEntidad(cronometro); 
+	},function() { //evalúa si el jugador perdió
+		var that = this
+		perder.style.display = "block";
+		reintentar.addEventListener('click',perdiste,false);
+		
 	});
     loaded = true;
     
@@ -77,5 +84,11 @@ function onClick (evt) {
         iniciarJuego();
   }
 }
+
+function perdiste(evt){
+	perder.style.display = "none";
+	vacalechera = new Juego(vacalechera.ctx,vacalechera.randoom,vacalechera.perder);
+	vacalechera.iniciar();
+};
 
 

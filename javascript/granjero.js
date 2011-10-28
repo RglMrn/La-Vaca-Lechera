@@ -14,7 +14,7 @@ function Granjero(juego, x, y) { //Entidad Granjero
     
     
     this.angulo = 0; 
-    this.velocidad = 0.1;
+    this.velocidad = 0.2;
     this.velocidadX = 0;
     this.velocidadY = 0;
     this.xNegativa = false;

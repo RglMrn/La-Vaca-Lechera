@@ -74,7 +74,7 @@ Juego.prototype.actualizar = function() {
         
         if (!this.entidades[i].remover) {
             this.entidades[i].actualizar();
-        this.entidades.sort(sortAscending);    
+            
         }
     }
     
@@ -84,6 +84,9 @@ Juego.prototype.actualizar = function() {
             this.entidades.splice(i, 1);
         }
     }
+    
+    //Ordena las entidades por su atributo z en orden ascendente
+    this.entidades.sort(sortAscending);
 };
 
 Juego.prototype.getTiempoJuego = function() {

@@ -35,24 +35,8 @@ ASSET_MANAGER.queueDownload("./imagenes/pollo.png","pollo");
 ASSET_MANAGER.downloadAll(function() {
     lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
     
-    vacalechera = new Juego(ctx,function(){
-	vaca = new Vaca(this, 780, 200);
-    granjero = new Granjero(this, 200, 200);
-    pollo = new Pollo(this, 485, 135);
-    contador = new Contador(this, 300, 30);
-    cronometro = new Cronometro(this, 50, 30);
+    vacalechera = new Juego(ctx, this.mostrar_perdiste);
     
-    this.addEntidad(vaca);
-    this.addEntidad(granjero);    
-    this.addEntidad(pollo);  
-    this.addEntidad(contador);  
-    this.addEntidad(cronometro); 
-	},function() { //evalúa si el jugador perdió
-		var that = this
-		fondo_perdiste.style.display = "block";
-		btn_reintentar.addEventListener('click',perdiste,false);
-		
-	});
     loaded = true;
     
 });
@@ -63,7 +47,7 @@ function iniciarJuego() {
     
     contenedor.removeChild(portada); 
     contenedor.removeChild(lbl_loading);
-    vacalechera.iniciar();
+    vacalechera.iniciarJuego();
     iniciado = true;
 }
 
@@ -85,10 +69,13 @@ function onClick (evt) {
   }
 }
 
-function perdiste(evt){
+function reiniciarJuego(evt){
 	fondo_perdiste.style.display = "none";
-	vacalechera = new Juego(vacalechera.ctx,vacalechera.randoom,vacalechera.perder);
-	vacalechera.iniciar();
+	vacalechera.iniciarJuego();
 };
 
+function mostrar_perdiste() {
+    fondo_perdiste.style.display = "block";
+    btn_reintentar.addEventListener('click',reiniciarJuego,false);
+};
 

@@ -11,11 +11,17 @@ window.requestAnimFrame = (function(){
           };
 })();
 
-function sortAscending(a,b){//Ordena ascendentemente usando y como z index
+//Función para hacer sorting ascendente en base al atributo 'z'
+function sortAscending(a,b){
 	return a.z-b.z;
-	}
+}
 
-function Juego(ctx,callback,callback2) { //El controlador principal del juego
+function Juego(ctx,mostrar_perdiste) { //El controlador principal del juego
+    this.mostrar_perdiste = mostrar_perdiste;
+    
+}
+
+Juego.prototype.inicializarAtributos = function() {
     this.entidades = [];
     this.ctx = ctx;
     this.ancho = ctx.canvas.width;
@@ -24,26 +30,45 @@ function Juego(ctx,callback,callback2) { //El controlador principal del juego
     this.atrapados = 0; //Total de chorros atrapados
     this.fallados = 0; //Total de chorros fallados
     this.tiemposLlegada = []; //Tiempos en los que llegarán los chorros al suelo
-	
-    this.clock = new Clock();
-    this.clockTick;
-    this.randoom=callback;
-	this.randoom();
-	this.perder = callback2;
-    //Muestra stats de rendimiento
-    this.stats = new Stats();
-}
+    this.clockTick = 0;
+    
+    
+};
 
-Juego.prototype.iniciar = function() { //Inicia el juego y el loop principal
-	stats = document.getElementById("stats");
+Juego.prototype.adicionarElementosIniciales = function() {
+    this.stats = new Stats();
+    stats = document.getElementById("stats");
 	if(stats)
 		document.body.removeChild(stats);
     document.body.appendChild(this.stats.domElement);
+    
+    this.clock = new Clock();
+    
+    
+    vaca = new Vaca(this, 780, 200);
+    granjero = new Granjero(this, 200, 200);
+    pollo = new Pollo(this, 485, 135);
+    contador = new Contador(this, 300, 30);
+    cronometro = new Cronometro(this, 50, 30);
+    
+    this.addEntidad(vaca);
+    this.addEntidad(granjero);    
+    this.addEntidad(pollo);  
+    this.addEntidad(contador);  
+    this.addEntidad(cronometro); 
+    
+};
+
+Juego.prototype.iniciarJuego = function() { //Inicia el juego y el loop principal
+	this.inicializarAtributos();
+    this.adicionarElementosIniciales();
+    
+    
     var that = this;
     (function gameLoop() {   
         //evalúa si el jugador perdió
         if (that.fallados > 0) { 
-            that.perder();
+            that.mostrar_perdiste();
         }
         else {
              that.loop();

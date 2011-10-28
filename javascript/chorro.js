@@ -27,7 +27,7 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     
     this.z=yInicial;
     
-    this.imagen = ASSET_MANAGER.getAsset('chorro');
+    this.imagen = asset_manager.getAsset('chorro');
     this.radius = this.imagen.height/2;
     
     //Tiempo que dura cada frame en milisegundos
@@ -106,7 +106,7 @@ function ChorroDerramado(juego, x, y) {
     this.z=0;
     
     
-    this.imagen = ASSET_MANAGER.getAsset("chorroderramado");
+    this.imagen = asset_manager.getAsset("chorroderramado");
     
     //Tiempo que dura cada frame en milisegundos
     var espera = 100;

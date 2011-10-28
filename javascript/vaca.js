@@ -2,7 +2,7 @@ function Vaca(juego, x, y) {
     //Obteniendo los atributos de la clase Entidad
     Entidad.call(this, juego, x, y);
     
-	this.imagen = ASSET_MANAGER.getAsset('vacanormal');
+	this.imagen = asset_manager.getAsset('vacanormal');
 	var espera = 880; //Tiempo antes de siguiente acción
 	this.animation = new Animation(this.imagen, 1, espera, false);
 }
@@ -92,7 +92,7 @@ function VacaArriba(juego, x, y, yFinal, disparo ) {
 	//Obteniendo los atributos de la clase Entidad
     Entidad.call(this, juego, x, y);
     
-    this.imagen = ASSET_MANAGER.getAsset('vacacamina');
+    this.imagen = asset_manager.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 2, 100, true);
 	this.disparo = disparo;
@@ -134,7 +134,7 @@ function VacaAbajo(juego, x, y,yFinal ,disparo) {
     //Obteniendo los atributos de la clase Entidad
     Entidad.call(this, juego, x, y);
     
-	this.imagen = ASSET_MANAGER.getAsset('vacacamina');
+	this.imagen = asset_manager.getAsset('vacacamina');
 	this.speed = 0.1;
 	this.animation = new Animation(this.imagen, 2, 100, true);
 	this.disparo = disparo;
@@ -177,7 +177,7 @@ function VacaDisparo(juego, x, y, disparo) {
     //Obteniendo los atributos de la clase Entidad
     Entidad.call(this, juego, x, y);
     
-	this.imagen = ASSET_MANAGER.getAsset('vacadisparo');
+	this.imagen = asset_manager.getAsset('vacadisparo');
 	this.animation = new Animation(this.imagen, 11, 100, false);
 	this.disparo = disparo;
 

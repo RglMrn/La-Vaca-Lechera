@@ -46,6 +46,9 @@ var Stats = function () {
 	_container.style.width = '80px';
 	_container.style.opacity = '0.9';
 	_container.style.zIndex = '10001';
+    _container.style.position = 'absolute';
+    _container.style.top = '0';
+    _container.style.right = '0';
 	_container.addEventListener( 'click', swapMode, false );
 
 	// fps

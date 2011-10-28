@@ -2,8 +2,8 @@ function Granjero(juego, x, y) { //Entidad Granjero
 	//Obteniendo los atributos de la clase Entidad
     Entidad.call(this, juego, x, y); 
     
-    this.animParado =  new Animation(ASSET_MANAGER.getAsset('cubetaarriba'), 1, 100, false);
-    this.animMovimiento = new Animation(ASSET_MANAGER.getAsset('granjeroquieto'), 1, 100, false);
+    this.animParado =  new Animation(asset_manager.getAsset('cubetaarriba'), 1, 100, false);
+    this.animMovimiento = new Animation(asset_manager.getAsset('granjeroquieto'), 1, 100, false);
     
 	this.animacion = this.animParado;
 	
@@ -171,7 +171,7 @@ Granjero.prototype.atrapoChorro = function(chorro) {
     
     if( Math.abs(cubetaX - chorro.x) < this.radioCubeta &&
         Math.abs(cubetaY - chorro.y) < this.radioCubeta) {
-        this.animacion = new Animation (ASSET_MANAGER.getAsset('granjeroatrapando'), 2, 350, false);
+        this.animacion = new Animation (asset_manager.getAsset('granjeroatrapando'), 2, 350, false);
         return true;  
     }
     else {

@@ -90,7 +90,7 @@ Juego.prototype.actualizar = function() {
             
         }
     }
-    this.entidades.sort(sortAscending);
+    
     for (var i = this.entidades.length-1; i >= 0; --i) {
         
         if (this.entidades[i].remover) {

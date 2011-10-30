@@ -1,6 +1,6 @@
 function Granjero(juego, x, y) { //Entidad Granjero
 	//Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
+    Entidad.call(this, juego, x, y, y); 
     
     this.animParado =  new Animation(asset_manager.getAsset('cubetaarriba'), 1, 100, false);
     this.animMovimiento = new Animation(asset_manager.getAsset('granjeroquieto'), 1, 100, false);

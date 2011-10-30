@@ -1,6 +1,6 @@
 function Cronometro(juego, x, y) { //Cronometro del juego
     //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
+    Entidad.call(this, juego, x, y, 1337); 
     
     this.texto = "";
 }

@@ -1,6 +1,6 @@
 function Pollo(juego, x, y) { //Entidad Pollo de Zealotscout
    //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
+    Entidad.call(this, juego, x, y, 0); 
     
 	this.animacion = new Animation(asset_manager.getAsset('pollo'), 21, 100, true);
     

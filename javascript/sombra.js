@@ -1,13 +1,12 @@
 function Sombra(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, xInicial, yInicial); 
+    Entidad.call(this, juego, xInicial, yInicial, 0); 
     
     this.xInicial = xInicial;
     this.yInicial = yInicial;
     this.tiempoTotal = tiempoTotal;
     this.xFinal = xFinal;
     this.distanciaChorro = 0;
-    this.z=0;
 
     this.gravedad = 1/10000;
     this.elapsedTime = 0;

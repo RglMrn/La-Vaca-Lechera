@@ -1,6 +1,6 @@
 function Granjero(juego, x, y) { //Entidad Granjero
 	//Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
+    Entidad.call(this, juego, x, y, y); 
     
     this.animParado =  new Animation(asset_manager.getAsset('cubetaarriba'), 1, 100, false);
     this.animMovimiento = new Animation(asset_manager.getAsset('granjeroquieto'), 1, 100, false);
@@ -102,17 +102,26 @@ Granjero.prototype.actualizar = function() {
         this.velocidadY = -this.velocidadY;
     }
     
-	if (this.destino.x -1 <= this.x && this.x <= this.destino.x + 1) {
+    if (!this.xNegativa && this.x >= this.destino.x) {
+        this.velocidadX = 0;
+        this.x = this.destino.x;
+        this.movimientoX = false;
+    }
+    else if(this.xNegativa && this.x <= this.destino.x) {
         this.velocidadX = 0;
         this.x = this.destino.x;
         this.movimientoX = false;
     }
     
-    if (this.destino.y -1 <= this.y && this.y <= this.destino.y + 1) {
+    if(!this.yNegativa && this.y >= this.destino.y) {
         this.y = this.destino.y;
         this.velocidadY = 0;
         this.movimientoY = false;
-        this.z=this.y;
+    }
+    else if(this.yNegativa && this.y <= this.destino.y) {
+        this.y = this.destino.y;
+        this.velocidadY = 0;
+        this.movimientoY = false;
     }
     
     

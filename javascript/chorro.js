@@ -1,13 +1,13 @@
-function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
+function Chorro(juego, xInicial, yInicial, tiempoVuelo, xFinal) {
     //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, xInicial, yInicial); 
+    Entidad.call(this, juego, xInicial, yInicial, yInicial); 
     
     //Coordenadas iniciales
     this.xInicial = xInicial;
     this.yInicial = yInicial;
     
     //Tiempo que pasará el chorro volando
-    this.tiempoTotal = tiempoTotal;
+    this.tiempoVuelo = tiempoVuelo;
     //Tiempo que ha transcurrido desde que nacío el chorro
     this.elapsedTime = 0;
     
@@ -19,13 +19,11 @@ function Chorro(juego, xInicial, yInicial, tiempoTotal, xFinal) {
     //Gravedad que siente el chorro
     this.gravedad = 1/10000;
     //Velocidades del chorro
-    this.velocidadX = deltaX / tiempoTotal;
-    this.velocidadY = 0.5 * this.gravedad * this.tiempoTotal;
+    this.velocidadX = deltaX / this.tiempoVuelo;
+    this.velocidadY = 0.5 * this.gravedad * this.tiempoVuelo;
     
     //Ángulo del chorro medido en radianes
     this.angulo = 0;
-    
-    this.z=yInicial;
     
     this.imagen = asset_manager.getAsset('chorro');
     this.radius = this.imagen.height/2;
@@ -101,9 +99,7 @@ Chorro.prototype.rotarAndDibujar = function(ctx) {
 
 function ChorroDerramado(juego, x, y) {
     //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
-    
-    this.z=0;
+    Entidad.call(this, juego, x, y, 0); 
     
     
     this.imagen = asset_manager.getAsset("chorroderramado");

@@ -1,6 +1,6 @@
 function Contador(juego, x, y) { //Entidad que muestra las falladas y atrapadas
     //Obteniendo los atributos de la clase Entidad
-    Entidad.call(this, juego, x, y); 
+    Entidad.call(this, juego, x, y, 1337); 
     
     this.texto = "";
 }

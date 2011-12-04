@@ -11,6 +11,7 @@ Vaca.prototype = new Entidad();
 Vaca.prototype.constructor = Vaca;
 
 Vaca.prototype.actualizar = function() {
+    this.x = this.juego.ancho * 0.97;
 	if(this.animation.willBeDone(this.juego.clock.maxStep)){
 		var disparo = this.elegirDisparo();
 		if(disparo != null) {
@@ -50,7 +51,7 @@ Vaca.prototype.actualizar = function() {
 };
 
 Vaca.prototype.dibujar = function(ctx) {
-	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y, this.juego.alto / 450);
     
     //Llama a la función dibujar de la clase Entidad
 	Entidad.prototype.dibujar.call(this, ctx);
@@ -103,6 +104,7 @@ VacaArriba.prototype = new Entidad();
 VacaArriba.prototype.constructor = VacaArriba;
 
 VacaArriba.prototype.actualizar = function() {
+    this.x = this.juego.ancho * 0.97;
 	if(this.y < this.yFinal) {
 		this.y = this.yFinal
 		if(this.disparo != null){
@@ -146,6 +148,7 @@ VacaAbajo.prototype = new Entidad();
 VacaAbajo.prototype.constructor = VacaAbajo;
 
 VacaAbajo.prototype.actualizar = function() {
+    this.x = this.juego.ancho * 0.97;
 	if(this.y > this.yFinal) {
 		this.y = this.yFinal
 		if(this.disparo != null){
@@ -187,6 +190,7 @@ VacaDisparo.prototype = new Entidad();
 VacaDisparo.prototype.constructor = VacaDisparo;
 
 VacaDisparo.prototype.actualizar = function() {
+    this.x = this.juego.ancho * 0.97;
     var offset = 60;  //Ancho invisible de la vaca
 	if(this.animation.willBeDone(this.juego.clock.maxStep)) {
 		this.juego.addEntidad(new Vaca(this.juego, this.x, this.y));

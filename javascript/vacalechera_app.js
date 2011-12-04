@@ -4,6 +4,7 @@ var portada = document.getElementById("portada");
 var contenedor = document.getElementById("content");
 var fondo_perdiste = document.getElementById("fondo_perdiste");
 var btn_reintentar = document.getElementById("btn_reintentar");
+var sugerencias = document.getElementById("linkSugerencias");
 
 var ctx = canvas.getContext('2d');
 
@@ -33,7 +34,7 @@ asset_manager.queueDownload("./imagenes/pollo.png","pollo");
 
 //Al culminar de descargar todas las imágenes se llama a la función enviada
 asset_manager.downloadAll(function() {
-    lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
+    ajustarPantalla();
     
     vacalechera = new Juego(ctx, this.mostrar_perdiste);
     
@@ -44,6 +45,7 @@ asset_manager.downloadAll(function() {
 function iniciarJuego() {
     canvas.style.display = "block";
     canvas.style.background = 'url(./imagenes/fondo.png)';
+    canvas.style.backgroundSize = '100%';
     
     contenedor.removeChild(portada); 
     contenedor.removeChild(lbl_loading);
@@ -58,6 +60,7 @@ function reiniciar_Juego(evt){
 
 //Muestra la pantalla que indica que perdiste y el botón de reintentar
 function mostrar_perdiste() {
+    
     fondo_perdiste.style.display = "block";
     btn_reintentar.addEventListener('click',reiniciar_Juego,false);
 };
@@ -93,3 +96,36 @@ window.requestAnimFrame = (function(){
           };
 })();
 
+window.onresize = function(event) {
+    ajustarPantalla();
+    vacalechera.ancho = generarAncho(800);
+    vacalechera.alto = generarAlto(450);    
+}
+
+function ajustarPantalla() {
+    
+    contenedor.style.width = generarAncho(800) + 'px';
+    canvas.width = generarAncho(800);
+    canvas.height = generarAlto(450);
+    
+    lbl_loading.style.top = generarAlto(420) + 'px';
+    lbl_loading.style.left = generarAncho(190) + 'px';
+    lbl_loading.style.padding = generarAlto(20) + 'px';
+    lbl_loading.style.fontSize = generarAlto(25) + 'px';
+    lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
+    
+    sugerencias.style.fontSize = generarAlto(16) + 'px';
+    sugerencias.style.marginTop = generarAlto(50) + 'px';
+    
+    fondo_perdiste.style.width = generarAncho(630) + 'px';
+    fondo_perdiste.style.height = generarAlto(395) + 'px';
+    fondo_perdiste.style.left = generarAncho(87) + 'px';
+    fondo_perdiste.style.top = generarAlto(30) + 'px';
+    
+    btn_reintentar.style.width = generarAncho(150) + 'px';
+    btn_reintentar.style.fontSize = generarAlto(25) + 'px';
+    btn_reintentar.style.top = generarAlto(290) + 'px';
+    btn_reintentar.style.left = generarAncho(200) + 'px';
+    btn_reintentar.style.padding = generarAlto(5) + 'px';
+    btn_reintentar.style.borderRadius = generarAlto(8) + 'px';
+}

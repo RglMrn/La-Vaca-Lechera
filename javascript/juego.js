@@ -36,7 +36,7 @@ Juego.prototype.adicionarElementosIniciales = function() {
     this.clock = new Clock();
     
     
-    vaca = new Vaca(this, 780, 200);
+    vaca = new Vaca(this, this.ancho * 0.97, 200);
     granjero = new Granjero(this, 200, 200);
     pollo = new Pollo(this, 485, 135);
     contador = new Contador(this, 300, 30);
@@ -59,7 +59,7 @@ Juego.prototype.iniciarJuego = function() {
     var that = this;
     (function gameLoop() {   
         //evalúa si el jugador perdió
-        if (that.fallados > 9) { 
+        if (that.fallados > 0) { 
             that.mostrar_perdiste();
         }
         else {

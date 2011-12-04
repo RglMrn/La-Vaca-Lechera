@@ -16,9 +16,30 @@ var iniciado = false;
 //Añade un asset_manager al objeto window para que sea accesible en cualquier parte
 window.asset_manager = new AssetManager();
 
-//Se añaden event listeners para cuando se presiona una tecla o se da un click
-window.addEventListener('keydown',onKeyDown,true);
-contenedor.addEventListener('click',onClick,true);
+//Evento para cuando se presiona cualquier tecla
+window.onkeydown = function (evt) {
+    if(iniciado) {
+        granjero.onKeyDown(evt);
+    }
+    else if (loaded) {
+        iniciarJuego();
+    }
+}
+//Evento para cuando se da un click dentro del área de juego
+contenedor.onclick = function (evt) {
+	if(iniciado) {
+        granjero.onClick(evt);
+	}
+	else if (loaded) {
+        iniciarJuego();
+  }
+}
+//Evento para cuando se da resize a la pantalla
+window.onresize = function(event) {
+    ajustarPantalla();
+    vacalechera.calcularDimensiones();
+ 
+}
 
 //Se añaden todas las imágenes a la lista de imágenes a descargar
 asset_manager.queueDownload("./imagenes/vaca_normal.png","vacanormal");
@@ -34,6 +55,8 @@ asset_manager.queueDownload("./imagenes/pollo.png","pollo");
 
 //Al culminar de descargar todas las imágenes se llama a la función enviada
 asset_manager.downloadAll(function() {
+    lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
+    
     ajustarPantalla();
     
     vacalechera = new Juego(ctx, this.mostrar_perdiste);
@@ -43,9 +66,10 @@ asset_manager.downloadAll(function() {
 });
 
 function iniciarJuego() {
+
+    
     canvas.style.display = "block";
-    canvas.style.background = 'url(./imagenes/fondo.png)';
-    canvas.style.backgroundSize = '100%';
+    canvas.style.backgroundImage = 'url(./imagenes/fondo.png)';
     
     contenedor.removeChild(portada); 
     contenedor.removeChild(lbl_loading);
@@ -65,54 +89,17 @@ function mostrar_perdiste() {
     btn_reintentar.addEventListener('click',reiniciar_Juego,false);
 };
 
-function onKeyDown(evt) {
-    if(iniciado) {
-        granjero.onKeyDown(evt);
-    }
-    else if (loaded) {
-        iniciarJuego();
-    }
-}
-
-function onClick (evt) {
-	if(iniciado) {
-        granjero.onClick(evt);
-	}
-	else if (loaded) {
-        iniciarJuego();
-  }
-}
-
-//Shim que se encarga de solicitar el animationFrame del browser que estemos utilizando
-//para optimizar la animacion del juego
-window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame     ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          window.oRequestAnimationFrame      ||
-          window.msRequestAnimationFrame     ||
-          function(/* function */ callback, /* DOMElement */ element){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
-
-window.onresize = function(event) {
-    ajustarPantalla();
-    vacalechera.ancho = generarAncho(800);
-    vacalechera.alto = generarAlto(450);    
-}
-
+//Ajusta las dimensiones de los elementos de la pantalla
 function ajustarPantalla() {
     
-    contenedor.style.width = generarAncho(800) + 'px';
-    canvas.width = generarAncho(800);
-    canvas.height = generarAlto(450);
+    contenedor.style.width = getAnchoPantalla() + 'px';
+    canvas.width = getAnchoPantalla();
+    canvas.height = getAltoPantalla();
     
     lbl_loading.style.top = generarAlto(420) + 'px';
     lbl_loading.style.left = generarAncho(190) + 'px';
     lbl_loading.style.padding = generarAlto(20) + 'px';
     lbl_loading.style.fontSize = generarAlto(25) + 'px';
-    lbl_loading.innerHTML = "Presiona cualquier tecla para continuar";
     
     sugerencias.style.fontSize = generarAlto(16) + 'px';
     sugerencias.style.marginTop = generarAlto(50) + 'px';
@@ -129,3 +116,16 @@ function ajustarPantalla() {
     btn_reintentar.style.padding = generarAlto(5) + 'px';
     btn_reintentar.style.borderRadius = generarAlto(8) + 'px';
 }
+
+//Shim que se encarga de solicitar el animationFrame del browser que estemos utilizando
+//para optimizar la animacion del juego
+window.requestAnimFrame = (function(){
+    return  window.requestAnimationFrame     ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          window.oRequestAnimationFrame      ||
+          window.msRequestAnimationFrame     ||
+          function(/* function */ callback, /* DOMElement */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();

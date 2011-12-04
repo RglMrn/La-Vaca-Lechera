@@ -51,7 +51,7 @@ Vaca.prototype.actualizar = function() {
 };
 
 Vaca.prototype.dibujar = function(ctx) {
-	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y, this.juego.alto / 450);
+	this.animation.drawFrame(this.juego.clockTick, ctx, this.x, this.y);
     
     //Llama a la función dibujar de la clase Entidad
 	Entidad.prototype.dibujar.call(this, ctx);

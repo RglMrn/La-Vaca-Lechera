@@ -14,15 +14,36 @@ var altoPantalla;
 
 
 //Regresa el ancho correcto acorde al tamaño de la pantalla
-function generarAncho (ancho) {
+function generarAncho (ancho, anchoReferencia) {
+    var anchoBase = anchoReferencia || anchoOriginal;
+    
     obtenerValoresPantalla();
+    
     return anchoPantalla * ancho/anchoOriginal;
 }
 
 //Regresa el alto correcto acorde al tamaño de la pantalla
-function generarAlto (alto) {
+function generarAlto (alto, altoReferencia) {
+    var altoBase = altoReferencia || altoOriginal;
+    
     obtenerValoresPantalla();
+
     return altoPantalla * alto/altoOriginal;
+}
+
+function getAnchoPantalla() {
+    obtenerValoresPantalla();
+    return anchoPantalla;
+}
+
+function getAltoPantalla() {
+    obtenerValoresPantalla();
+    return altoPantalla;
+}
+
+function getScale() {
+    
+    return anchoPantalla/anchoOriginal;
 }
 
 //Obtiene los valores actuales que tiene la pantalla

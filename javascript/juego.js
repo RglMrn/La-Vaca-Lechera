@@ -8,8 +8,8 @@ Juego.prototype.inicializarAtributos = function() {
     //Arreglo que contiene todas las entidades que se actualizan y dibujan
     this.entidades = [];
     
-    this.ancho = ctx.canvas.width;
-    this.alto = ctx.canvas.height;
+    this.ancho = getAnchoPantalla();
+    this.alto = getAltoPantalla();  
 
     //Total de chorros atrapados
     this.atrapados = 0; 
@@ -29,18 +29,19 @@ Juego.prototype.inicializarAtributos = function() {
 Juego.prototype.adicionarElementosIniciales = function() {
     this.stats = new Stats();
     stats = document.getElementById("stats");
-	if(stats)
+	if(stats) {
 		document.getElementById('content').removeChild(stats);
+    }
     document.getElementById('content').appendChild(this.stats.domElement);
     
     this.clock = new Clock();
     
     
-    vaca = new Vaca(this, this.ancho * 0.97, 200);
-    granjero = new Granjero(this, 200, 200);
-    pollo = new Pollo(this, 485, 135);
-    contador = new Contador(this, 300, 30);
-    cronometro = new Cronometro(this, 50, 30);
+    vaca = new Vaca(this, generarAncho(776), generarAlto(200));
+    granjero = new Granjero(this, generarAncho(200), generarAlto(200));
+    pollo = new Pollo(this, generarAncho(485), generarAlto(135));
+    contador = new Contador(this, generarAncho(300), generarAlto(30));
+    cronometro = new Cronometro(this, generarAncho(50), generarAlto(30));
     
     this.addEntidad(vaca);
     this.addEntidad(granjero);    
@@ -119,6 +120,15 @@ Juego.prototype.addEntidad = function(entidad) {
 
 Juego.prototype.getTiempoJuego = function() {
 	return this.clock.gameTime;
+};
+
+Juego.prototype.calcularDimensiones = function() {
+    for (var i = 0; i < this.entidades.length; i++) {
+        this.entidades[i].reposicionar(this.ancho, this.alto);
+    }
+    
+    this.ancho = getAnchoPantalla();
+    this.alto = getAltoPantalla();  
 };
 
 //Función para hacer sorting ascendente en base al atributo 'z'

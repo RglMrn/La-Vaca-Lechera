@@ -10,6 +10,7 @@ function Animation(spriteSheet, cantidadFrames, frameDuration, loop) {
 
 Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) {
     var scaleBy = scaleBy || 1;
+    scaleBy *= getScale();
     this.elapsedTime += tick;
     if (this.loop) {
         if (this.isDone()) {

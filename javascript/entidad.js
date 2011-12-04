@@ -7,11 +7,13 @@ function Entidad(juego, x, y, z) { //Define los atributos bases de toda entidad
 	//juego.addEntidad(this);
 }
 
-Entidad.prototype.actualizar = function() { //La logica basica de actualizacion de las entidades
+//La logica basica de actualizacion de las entidades
+Entidad.prototype.actualizar = function() { 
 	
 };
 
-Entidad.prototype.dibujar = function(ctx) { //La logica basica de dibujo de las entidades
+//La logica basica de dibujo de las entidades
+Entidad.prototype.dibujar = function(ctx) { 
 
     //Dibujar circulo de guia alrededor de la imagen
     /*ctx.beginPath();
@@ -20,5 +22,11 @@ Entidad.prototype.dibujar = function(ctx) { //La logica basica de dibujo de las 
     ctx.stroke();
     ctx.closePath();*/
 };
+
+Entidad.prototype.reposicionar = function(anchoReferencia, altoReferencia) {
+    this.x = generarAncho(this.x, anchoReferencia);
+    this.y = generarAlto(this.y, altoReferencia);
+    
+}
 
 

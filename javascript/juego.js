@@ -60,7 +60,7 @@ Juego.prototype.iniciarJuego = function() {
     var that = this;
     (function gameLoop() {   
         //evalúa si el jugador perdió
-        if (that.fallados > 0) { 
+        if (that.fallados > 9) { 
             that.mostrar_perdiste();
         }
         else {

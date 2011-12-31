@@ -42,15 +42,15 @@ window.onresize = function(event) {
 }
 
 //Se añaden todas las imágenes a la lista de imágenes a descargar
-asset_manager.queueDownload("./imagenes/vaca_normal.png","vacanormal");
-asset_manager.queueDownload("./imagenes/vaca_disparo.png","vacadisparo");
-asset_manager.queueDownload('./imagenes/vacaCaminaSprite.png',"vacacamina");
-asset_manager.queueDownload("./imagenes/granjero1.png","granjeroquieto");
-asset_manager.queueDownload("./imagenes/granjero2.png","cubetaarriba");
-asset_manager.queueDownload("./imagenes/Sprites3-4.png","granjeroatrapando");
-asset_manager.queueDownload("./imagenes/chorro_chico.png","chorro");
+asset_manager.queueDownload("./imagenes/vacaNormal.png","vacaNormal");
+asset_manager.queueDownload("./imagenes/vacaDisparo.png","vacaDisparo");
+asset_manager.queueDownload('./imagenes/vacaCamina.png',"vacaCamina");
+asset_manager.queueDownload("./imagenes/granjeroQuieto.png","granjeroQuieto");
+asset_manager.queueDownload("./imagenes/granjeroCubetaArriba.png","cubetaArriba");
+asset_manager.queueDownload("./imagenes/granjeroAtrapando.png","granjeroAtrapando");
+asset_manager.queueDownload("./imagenes/chorro.png","chorro");
 asset_manager.queueDownload("./imagenes/fondo.png","fondo");
-asset_manager.queueDownload("./imagenes/chorro_derramado.png","chorroderramado");
+asset_manager.queueDownload("./imagenes/chorroDerramado.png","chorroDerramado");
 asset_manager.queueDownload("./imagenes/pollo.png","pollo");
 
 //Al culminar de descargar todas las imágenes se llama a la función enviada

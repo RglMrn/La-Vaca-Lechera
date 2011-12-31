@@ -102,7 +102,7 @@ function ChorroDerramado(juego, x, y) {
     Entidad.call(this, juego, x, y, 0); 
     
     
-    this.imagen = asset_manager.getAsset("chorroderramado");
+    this.imagen = asset_manager.getAsset("chorroDerramado");
     
     //Tiempo que dura cada frame en milisegundos
     var espera = 100;

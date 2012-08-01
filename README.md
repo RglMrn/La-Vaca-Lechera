@@ -37,7 +37,7 @@ Estos son los pasos a aseguir:
 - Modifica/crea los archivos para realizar tu aporte y haz los commits a tu Fork
 - Haz un Pull Request para integrar tus cambios a este repositorio
 
-Para aprender a hacer todo lo anterior, puedes seguir [esta guía](https://github.com/Trisfera/Trisfera/wiki/Git-y-Github).
+Para aprender a hacer todo lo anterior, puedes seguir [esta guía](https://github.com/Trisfera/Trisfera/wiki/Introducci%C3%B3n-a-Git-y-Github).
 
 Tienes algún Bug o Feature Request?
 -----------------------------------

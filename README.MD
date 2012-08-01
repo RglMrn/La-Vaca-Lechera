@@ -4,7 +4,7 @@ La Vaca Lechera
 Tú eres un granjero novato, ella es una vaca bastante troll. En este juego, el objetivo es atrapar los chorros de leche que lanza la vaca. 
 
 Cómo fue hecho este juego?
-------------------
+--------------------------
 
 Se utilizó HTML y JavaScript. Las imágenes fueron hechas con Inkscape.
 
